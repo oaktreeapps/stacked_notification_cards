@@ -7,8 +7,10 @@ import 'stacked_container.dart';
 import 'last_notification_card.dart';
 import '../model/notification_card.dart';
 import '../notification_tile/notification_tile.dart';
+import '../notification_tile/slid_button.dart';
+import '../expanded_list/expanded_list.dart';
 
-class CollapsedCards extends StatelessWidget {
+class CollapsedCards extends StatefulWidget {
   final AnimationController controller;
   final List<NotificationCard> notifications;
   final double containerHeight;
@@ -19,8 +21,18 @@ class CollapsedCards extends StatelessWidget {
   final Color containerColor;
   final double cornerRadius;
   final double padding;
+  final String type;
+  final TextStyle titleTextStyle;
+  final TextStyle? subtitleTextStyle;
+  final List<BoxShadow>? shadow;
+  final VoidCallback onTapClearAll;
+  final Widget clearAll;
+  final Widget view;
+  final Widget clear;
+  final OnTapSlidButtonCallback onTapViewCallback;
+  final OnTapSlidButtonCallback onTapClearCallback;
 
-  const CollapsedCards({
+  CollapsedCards({
     Key? key,
     required this.controller,
     required this.notifications,
@@ -32,45 +44,110 @@ class CollapsedCards extends StatelessWidget {
     required this.containerColor,
     required this.cornerRadius,
     required this.padding,
+    required this.type,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    required this.shadow,
+    required this.onTapClearAll,
+    required this.clearAll,
+    required this.clear,
+    required this.view,
+    required this.onTapClearCallback,
+    required this.onTapViewCallback,
   }) : super(key: key);
 
+  @override
+  _CollapsedCardsState createState() => _CollapsedCardsState();
+}
+
+class _CollapsedCardsState extends State<CollapsedCards> {
+  late SlidableController slidableController;
+
+  bool? slidableOpened = false;
+
+  @override
+  void initState() {
+    super.initState();
+    slidableController = SlidableController(
+      onSlideIsOpenChanged: (value) {
+        setState(() {
+          slidableOpened = value;
+        });
+      },
+      onSlideAnimationChanged: (value) {},
+    );
+  }
+
   double getBaseHeight() {
-    final length = notifications.length;
+    final length = widget.notifications.length;
     if (length == 1)
       return 0;
     else if (length == 2)
-      return spacing;
+      return widget.spacing;
     else
-      return 2 * spacing;
+      return 2 * widget.spacing;
   }
 
   @override
   Widget build(BuildContext context) {
-    final lastNotification = notifications.first;
+    final lastNotification = widget.notifications.first;
+
+    final controller = widget.controller;
+    final notifications = widget.notifications;
+    final containerHeight = widget.containerHeight;
+    final spacing = widget.spacing;
+    final onTapShowMore = widget.onTapShowMore;
+    final isExpaned = widget.isExpaned;
+    final maxSpacing = widget.maxSpacing;
+    final containerColor = widget.containerColor;
+    final cornerRadius = widget.cornerRadius;
+    final padding = widget.padding;
+    final type = widget.type;
+    final titleTextStyle = widget.titleTextStyle;
+    final subtitleTextStyle = widget.subtitleTextStyle;
+    final shadow = widget.shadow;
+    final onTapClearAll = widget.onTapClearAll;
+    final clearAll = widget.clearAll;
+    final view = widget.view;
+    final clear = widget.clear;
+    final onTapClear = widget.onTapClearCallback;
+    final onTapView = widget.onTapViewCallback;
+
+    final index = notifications.length - 1;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: Slidable(
+        controller: slidableController,
         actionPane: SlidableBehindActionPane(),
         secondaryActions: [
           Align(
             alignment: Alignment.topCenter,
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 8,
+            child: SlidButton(
+              padding: EdgeInsets.only(
+                left: padding,
               ),
+              color: containerColor,
               height: containerHeight,
-              alignment: Alignment.center,
-              child: Text('Clear All'),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                  width: 1.4,
-                ),
-              ),
+              leftCornerRadius: cornerRadius,
+              rightCornerRadius: cornerRadius,
+              shadow: shadow,
+              onTapButton: isExpaned ? () => onTapView(index) : onTapClearAll,
+              child: isExpaned ? view : clearAll,
             ),
           ),
+          if (isExpaned)
+            SlidButton(
+                padding: EdgeInsets.only(
+                  left: padding,
+                ),
+                color: containerColor,
+                height: containerHeight,
+                leftCornerRadius: cornerRadius,
+                rightCornerRadius: cornerRadius,
+                shadow: shadow,
+                onTapButton: () => onTapClear(index),
+                child: clear)
         ],
         child: Stack(
           children: [
@@ -83,6 +160,7 @@ class CollapsedCards extends StatelessWidget {
             Visibility(
               visible: notifications.length > 2,
               child: StackedContainer(
+                shadow: shadow,
                 key: ValueKey('StackedContainer'),
                 horizontalPadding: 2 * spacing,
                 color: containerColor,
@@ -96,6 +174,7 @@ class CollapsedCards extends StatelessWidget {
             Visibility(
               visible: notifications.length > 1,
               child: StackedContainer(
+                shadow: shadow,
                 horizontalPadding: spacing,
                 color: containerColor,
                 controller: controller,
@@ -109,6 +188,7 @@ class CollapsedCards extends StatelessWidget {
               visible: controller.value <= 0.8,
               child: AnimatedOffsetList(
                 key: ValueKey('AnimatedOffsetList'),
+                type: type,
                 controller: controller,
                 interval: Interval(0.4, 0.8),
                 notifications: notifications,
@@ -116,11 +196,15 @@ class CollapsedCards extends StatelessWidget {
                 spacing: maxSpacing,
                 cornerRadius: cornerRadius,
                 tileColor: containerColor,
+                titleTextStyle: titleTextStyle,
+                subtitleTextStyle: subtitleTextStyle,
+                shadow: shadow,
               ),
             ),
             Visibility(
               visible: !isExpaned,
               child: LastNotificationCard(
+                type: type,
                 controller: controller,
                 notification: lastNotification,
                 totalCount: notifications.length,
@@ -128,18 +212,23 @@ class CollapsedCards extends StatelessWidget {
                 height: containerHeight,
                 color: containerColor,
                 cornerRadius: cornerRadius,
+                titleTextStyle: titleTextStyle,
+                subtitleTextStyle: subtitleTextStyle,
+                shadow: shadow,
+                slidableOpened: slidableOpened ?? false,
               ),
             ),
             Visibility(
               visible: isExpaned,
               child: NotificationTile(
-                heading: 'Message',
+                heading: type,
                 dateTime: lastNotification.dateTime,
                 title: lastNotification.title,
                 subtitle: lastNotification.subtitle,
                 height: containerHeight,
                 cornerRadius: cornerRadius,
-                color: containerColor,
+                color: containerColor, titleTextStyle: titleTextStyle,
+                subtitleTextStyle: subtitleTextStyle, shadow: shadow,
                 // padding: ,
               ),
             ),
@@ -147,14 +236,5 @@ class CollapsedCards extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class SlidButton extends StatelessWidget {
-  const SlidButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 
 class NotificationCard {
   final DateTime dateTime;
-  final IconData leadingIcon;
-  final double iconSize;
+  final Widget leading;
   final String title;
   final String subtitle;
 
-  NotificationCard({
+  const NotificationCard({
     required this.dateTime,
-    required this.leadingIcon,
-    required this.iconSize,
+    required this.leading,
     required this.title,
     required this.subtitle,
   });

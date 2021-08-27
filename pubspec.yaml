@@ -1,5 +1,5 @@
 name: stacked_notification_cards
-description: A new Flutter project.
+description: This package gives iOS style stacked notification. And expand with a cool animaiton. It's also possible to slid each notificion or when they are grouped.
 
 publish_to: 'none' 
 

@@ -11,6 +11,11 @@ class AnimatedOffsetList extends StatelessWidget {
   final double spacing;
   final Color tileColor;
   final double cornerRadius;
+  final String type;
+  final TextStyle titleTextStyle;
+  final TextStyle? subtitleTextStyle;
+    final List<BoxShadow>? shadow;
+
 
   const AnimatedOffsetList({
     Key? key,
@@ -21,6 +26,10 @@ class AnimatedOffsetList extends StatelessWidget {
     required this.spacing,
     required this.cornerRadius,
     required this.tileColor,
+    required this.type,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    required this.shadow,
   }) : super(key: key);
 
   @override
@@ -42,13 +51,16 @@ class AnimatedOffsetList extends StatelessWidget {
                   )
                   .value,
               child: NotificationTile(
-                heading: 'Message',
+                heading: type,
                 dateTime: notification.dateTime,
                 title: notification.title,
                 subtitle: notification.subtitle,
                 height: height,
                 color: tileColor,
                 cornerRadius: cornerRadius,
+                titleTextStyle: titleTextStyle,
+                subtitleTextStyle: subtitleTextStyle,
+                shadow: shadow,
               ),
             );
           },

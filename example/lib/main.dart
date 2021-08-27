@@ -27,32 +27,42 @@ class _MyHomePageState extends State<MyHomePage> {
   List<NotificationCard> _listOfNotification = [
     NotificationCard(
         dateTime: DateTime.now(),
-        leadingIcon: Icons.account_circle,
-        iconSize: 48,
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
         title: 'OakTree 1',
         subtitle: 'We believe in the power of mobile computing.'),
     NotificationCard(
         dateTime: DateTime.now().subtract(const Duration(minutes: 4)),
-        leadingIcon: Icons.account_circle,
-        iconSize: 48,
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
         title: 'OakTree 2',
         subtitle: 'We believe in the power of mobile computing.'),
     NotificationCard(
         dateTime: DateTime.now().subtract(const Duration(minutes: 10)),
-        leadingIcon: Icons.account_circle,
-        iconSize: 48,
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
         title: 'OakTree 3',
         subtitle: 'We believe in the power of mobile computing.'),
     NotificationCard(
         dateTime: DateTime.now().subtract(const Duration(minutes: 30)),
-        leadingIcon: Icons.account_circle,
-        iconSize: 48,
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
         title: 'OakTree 4',
         subtitle: 'We believe in the power of mobile computing.'),
     NotificationCard(
         dateTime: DateTime.now().subtract(const Duration(minutes: 44)),
-        leadingIcon: Icons.account_circle,
-        iconSize: 48,
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
         title: 'OakTree 5',
         subtitle: 'We believe in the power of mobile computing.'),
   ];
@@ -62,13 +72,46 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Stacked Notification Card'),
+        title: Text(
+          'Stacked Notification Card',
+        ),
       ),
       body: SingleChildScrollView(
         child: StackedNotificationCards(
+          type: 'Message',
           notifications: [..._listOfNotification],
           cardColor: Color(0xFFF1F1F1),
           padding: 16,
+          headerTitle: Text(
+            'Notifications',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          headerShowLess: Text(
+            'Show less',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepPurple,
+            ),
+          ),
+          onTapClearAll: () {
+            print('cleared all');
+          },
+          clearAll: Text('Clear All'),
+          clear: Text('clear'),
+          view: Text('view'),
+          onTapClearCallback: (index) {
+            print(index);
+            setState(() {
+              _listOfNotification.removeAt(index);
+            });
+          },
+          onTapViewCallback: (index) {
+            print(index);
+          },
         ),
       ),
     );

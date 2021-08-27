@@ -5,6 +5,8 @@ class Header extends StatelessWidget {
   final VoidCallback onTapShowLess;
   final double padding;
   final double spacing;
+  final Widget showLess;
+  final Widget title;
 
   const Header({
     Key? key,
@@ -12,6 +14,8 @@ class Header extends StatelessWidget {
     required this.onTapShowLess,
     required this.padding,
     required this.spacing,
+    required this.title,
+    required this.showLess,
   }) : super(key: key);
 
   @override
@@ -34,13 +38,7 @@ class Header extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Notifications',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+         title,
           Expanded(
             child: SizedBox(),
           ),
@@ -48,14 +46,7 @@ class Header extends StatelessWidget {
             onTap: onTapShowLess,
             child: Opacity(
               opacity: opacity.value,
-              child: Text(
-                'Show less',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
-                ),
-              ),
+              child: showLess,
             ),
           ),
           // Padding(

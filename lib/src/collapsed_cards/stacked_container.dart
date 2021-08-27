@@ -8,6 +8,8 @@ class StackedContainer extends StatelessWidget {
   final double offset;
   final Color shadeColor;
   final double cornerRadius;
+  final List<BoxShadow>? shadow;
+
   const StackedContainer({
     Key? key,
     required this.horizontalPadding,
@@ -17,6 +19,7 @@ class StackedContainer extends StatelessWidget {
     required this.offset,
     required this.shadeColor,
     required this.cornerRadius,
+    required this.shadow,
   }) : super(key: key);
 
   @override
@@ -43,6 +46,7 @@ class StackedContainer extends StatelessWidget {
                 //   color: Color(0xFFDADADA),
                 //   width: 1.4,
                 // ),
+                boxShadow: shadow,
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(cornerRadius),
                 ),

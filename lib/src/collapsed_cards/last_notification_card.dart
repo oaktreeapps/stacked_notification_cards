@@ -11,6 +11,11 @@ class LastNotificationCard extends StatelessWidget {
   final double cornerRadius;
   final Color color;
   final double height;
+  final String type;
+  final TextStyle titleTextStyle;
+  final TextStyle? subtitleTextStyle;
+  final List<BoxShadow>? shadow;
+  final bool slidableOpened;
 
   const LastNotificationCard({
     Key? key,
@@ -21,6 +26,11 @@ class LastNotificationCard extends StatelessWidget {
     required this.color,
     required this.cornerRadius,
     required this.height,
+    required this.type,
+    required this.subtitleTextStyle,
+    required this.titleTextStyle,
+    required this.shadow,
+    required this.slidableOpened,
   }) : super(key: key);
 
   @override
@@ -30,6 +40,7 @@ class LastNotificationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(cornerRadius),
+        boxShadow: shadow,
         // border: Border.all(
         //   color: Colors.black.withOpacity(0.2),
         //   width: 1.4,
@@ -53,9 +64,12 @@ class LastNotificationCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Message',
-                    style: kCardTopTextStyle,
+                  Expanded(
+                    child: Text(
+                      type,
+                      style: kCardTopTextStyle,
+                      maxLines: 1,
+                    ),
                   ),
                   Text(
                     'Today ${DateFormat('h:mm a').format(notification.dateTime)}',
@@ -86,9 +100,16 @@ class LastNotificationCard extends StatelessWidget {
                 ),
                 title: Text(
                   notification.title,
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: titleTextStyle,
                 ),
-                subtitle: Text(notification.subtitle),
+                subtitle: Text(
+                  notification.subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: subtitleTextStyle,
+                ),
               ),
             ),
           ),
@@ -113,20 +134,27 @@ class LastNotificationCard extends StatelessWidget {
                 ),
                 title: Text(
                   notification.title,
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: titleTextStyle,
                 ),
-                subtitle: Text(notification.subtitle),
+                subtitle: Text(
+                  notification.subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: subtitleTextStyle,
+                ),
               ),
             ),
           ),
           Positioned(
             bottom: 16,
             child: MoreNotificationButton(
-
               key: ValueKey('MoreNotificationButton'),
               controller: controller,
               onTapExpand: onTapExpand,
               totalCount: totalCount,
+              slidableOpened: slidableOpened,
             ),
           ),
         ],
@@ -139,17 +167,19 @@ class MoreNotificationButton extends StatelessWidget {
   final VoidCallback onTapExpand;
   final AnimationController controller;
   final int totalCount;
-  const MoreNotificationButton(
-      {Key? key,
-      required this.onTapExpand,
-      required this.controller,
-      required this.totalCount})
-      : super(key: key);
+  final bool slidableOpened;
+  const MoreNotificationButton({
+    Key? key,
+    required this.onTapExpand,
+    required this.controller,
+    required this.totalCount,
+    required this.slidableOpened,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTapExpand,
+      onTap: slidableOpened == true ? null : onTapExpand,
       child: Opacity(
         opacity: Tween(begin: 1.0, end: 0.0)
             .animate(
