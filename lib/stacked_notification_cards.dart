@@ -2,7 +2,7 @@ library stacked_notification_cards;
 
 import 'package:flutter/material.dart';
 import 'src/build_stacked_notification.dart';
-import 'src/expanded_list/expanded_list.dart';
+import 'src/stacked_cards/expanded_list.dart';
 import 'src/model/notification_card.dart';
 export 'src/model/notification_card.dart';
 

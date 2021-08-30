@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../expanded_list/animated_offset_list.dart';
+import 'animated_offset_list.dart';
 
-import 'stacked_container.dart';
+import 'offset_spacer.dart';
 import 'last_notification_card.dart';
 import '../model/notification_card.dart';
 import '../notification_tile/notification_tile.dart';
 import '../notification_tile/slid_button.dart';
-import '../expanded_list/expanded_list.dart';
+import 'expanded_list.dart';
 
-class CollapsedCards extends StatefulWidget {
+class StackedCards extends StatefulWidget {
   final AnimationController controller;
   final List<NotificationCard> notifications;
   final double containerHeight;
@@ -32,7 +32,7 @@ class CollapsedCards extends StatefulWidget {
   final OnTapSlidButtonCallback onTapViewCallback;
   final OnTapSlidButtonCallback onTapClearCallback;
 
-  CollapsedCards({
+  StackedCards({
     Key? key,
     required this.controller,
     required this.notifications,
@@ -57,10 +57,10 @@ class CollapsedCards extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CollapsedCardsState createState() => _CollapsedCardsState();
+  _StackedCardsState createState() => _StackedCardsState();
 }
 
-class _CollapsedCardsState extends State<CollapsedCards> {
+class _StackedCardsState extends State<StackedCards> {
   late SlidableController slidableController;
 
   bool? slidableOpened = false;
@@ -78,7 +78,7 @@ class _CollapsedCardsState extends State<CollapsedCards> {
     );
   }
 
-  double getBaseHeight() {
+  double _getBaseHeight() {
     final length = widget.notifications.length;
     if (length == 1)
       return 0;
@@ -90,7 +90,7 @@ class _CollapsedCardsState extends State<CollapsedCards> {
 
   @override
   Widget build(BuildContext context) {
-    final lastNotification = widget.notifications.first;
+    final lastNotification = widget.notifications.last;
 
     final controller = widget.controller;
     final notifications = widget.notifications;
@@ -151,41 +151,17 @@ class _CollapsedCardsState extends State<CollapsedCards> {
         ],
         child: Stack(
           children: [
-            Visibility(
-              visible: controller.value <= 0.4,
-              child: Container(
-                height: containerHeight + getBaseHeight(),
-              ),
+            OffsetSpacer(
+              initialHeight:
+                  containerHeight + (notifications.length * spacing) + padding,
+              height: containerHeight,
+              controller: controller,
+              spacing: 2 * spacing,
+              notifications: notifications,
+              padding: padding,
             ),
             Visibility(
-              visible: notifications.length > 2,
-              child: StackedContainer(
-                shadow: shadow,
-                key: ValueKey('StackedContainer'),
-                horizontalPadding: 2 * spacing,
-                color: containerColor,
-                controller: controller,
-                height: containerHeight,
-                offset: 2 * spacing,
-                cornerRadius: cornerRadius,
-                shadeColor: Colors.black.withOpacity(0.1),
-              ),
-            ),
-            Visibility(
-              visible: notifications.length > 1,
-              child: StackedContainer(
-                shadow: shadow,
-                horizontalPadding: spacing,
-                color: containerColor,
-                controller: controller,
-                height: containerHeight,
-                offset: spacing,
-                cornerRadius: cornerRadius,
-                shadeColor: Colors.black.withOpacity(0.05),
-              ),
-            ),
-            Visibility(
-              visible: controller.value <= 0.8,
+              visible: notifications.length > 1 && controller.value <= 0.8,
               child: AnimatedOffsetList(
                 key: ValueKey('AnimatedOffsetList'),
                 type: type,
@@ -199,38 +175,41 @@ class _CollapsedCardsState extends State<CollapsedCards> {
                 titleTextStyle: titleTextStyle,
                 subtitleTextStyle: subtitleTextStyle,
                 shadow: shadow,
+                opacityInterval: Interval(0.4, 0.6),
               ),
             ),
-            Visibility(
-              visible: !isExpaned,
-              child: LastNotificationCard(
-                type: type,
-                controller: controller,
-                notification: lastNotification,
-                totalCount: notifications.length,
-                onTapExpand: onTapShowMore,
-                height: containerHeight,
-                color: containerColor,
-                cornerRadius: cornerRadius,
-                titleTextStyle: titleTextStyle,
-                subtitleTextStyle: subtitleTextStyle,
-                shadow: shadow,
-                slidableOpened: slidableOpened ?? false,
-              ),
+            LastNotificationCard(
+              type: type,
+              controller: controller,
+              notification: lastNotification,
+              totalCount: notifications.length,
+              onTapExpand: onTapShowMore,
+              height: containerHeight,
+              color: containerColor,
+              cornerRadius: cornerRadius,
+              titleTextStyle: titleTextStyle,
+              subtitleTextStyle: subtitleTextStyle,
+              shadow: shadow,
+              slidableOpened: slidableOpened ?? false,
             ),
-            Visibility(
-              visible: isExpaned,
-              child: NotificationTile(
-                heading: type,
-                dateTime: lastNotification.dateTime,
-                title: lastNotification.title,
-                subtitle: lastNotification.subtitle,
-                height: containerHeight,
-                cornerRadius: cornerRadius,
-                color: containerColor, titleTextStyle: titleTextStyle,
-                subtitleTextStyle: subtitleTextStyle, shadow: shadow,
-                // padding: ,
-              ),
+            ExpandedList(
+              type: type,
+              controller: controller,
+              containerHeight: containerHeight,
+              spacing: spacing,
+              initialSpacing: 2 * spacing,
+              notifications: notifications,
+              tileColor: containerColor,
+              cornerRadius: cornerRadius,
+              tilePadding: padding,
+              titleTextStyle: titleTextStyle,
+              subtitleTextStyle: subtitleTextStyle,
+              shadow: shadow,
+              clear: clear,
+              view: view,
+              endPadding: padding,
+              onTapViewCallback: onTapView,
+              onTapClearCallback: onTapClear,
             ),
           ],
         ),

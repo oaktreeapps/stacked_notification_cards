@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'collapsed_cards/collapsed_cards.dart';
-import 'expanded_list/expanded_list.dart';
+import 'stacked_cards/stacked_cards.dart';
+import 'stacked_cards/expanded_list.dart';
+
 import 'header/header.dart';
 import 'model/notification_card.dart';
 import 'notification_tile/notification_tile.dart';
@@ -93,6 +94,7 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     // final headerClearAll = widget.headerClearAll;
 
     notifications.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+    // notifications.sort((a, b) => b.dateTime.compareTo(a.dateTime));
 
     return AnimatedBuilder(
       animation: _animationController,
@@ -113,55 +115,55 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
               _animationController.reverse();
             },
           ),
+          // Visibility(
+          //   visible: notifications.length == 1,
+          //   child: Slidable(
+          //     actionPane: SlidableBehindActionPane(),
+          //     secondaryActions: [
+          //       SlidButton(
+          //         padding: EdgeInsets.fromLTRB(0, 0, padding, 0),
+          //         color: tileColor,
+          //         shadow: shadow,
+          //         height: _containerHeight,
+          //         child: view,
+          //         onTapButton: () {
+          //           onTapViewCallback(0);
+          //         },
+          //         leftCornerRadius: cornerRadius,
+          //         rightCornerRadius: cornerRadius,
+          //       ),
+          //       SlidButton(
+          //         padding: EdgeInsets.fromLTRB(0, 0, padding, 0),
+          //         color: tileColor,
+          //         shadow: shadow,
+          //         height: _containerHeight,
+          //         child: clear,
+          //         onTapButton: () {
+          //           onTapClearCallback(0);
+          //         },
+          //         rightCornerRadius: cornerRadius,
+          //         leftCornerRadius: cornerRadius,
+          //       ),
+          //     ],
+          //     child: NotificationTile(
+          //       key: ValueKey('NotificationTile'),
+          //       heading: type,
+          //       dateTime: notifications.first.dateTime,
+          //       title: notifications.first.title,
+          //       subtitle: notifications.first.subtitle,
+          //       height: _containerHeight,
+          //       color: tileColor,
+          //       cornerRadius: cornerRadius,
+          //       padding: EdgeInsets.symmetric(horizontal: padding),
+          //       titleTextStyle: titleStyle,
+          //       subtitleTextStyle: subtitleStyle,
+          //       shadow: shadow,
+          //     ),
+          //   ),
+          // ),
           Visibility(
-            visible: notifications.length == 1,
-            child: Slidable(
-              actionPane: SlidableBehindActionPane(),
-              secondaryActions: [
-                SlidButton(
-                  padding: EdgeInsets.fromLTRB(0, 0, padding, 0),
-                  color: tileColor,
-                  shadow: shadow,
-                  height: _containerHeight,
-                  child: view,
-                  onTapButton: () {
-                    onTapViewCallback(0);
-                  },
-                  leftCornerRadius: cornerRadius,
-                  rightCornerRadius: cornerRadius,
-                ),
-                SlidButton(
-                  padding: EdgeInsets.fromLTRB(0, 0, padding, 0),
-                  color: tileColor,
-                  shadow: shadow,
-                  height: _containerHeight,
-                  child: clear,
-                  onTapButton: () {
-                    onTapClearCallback(0);
-                  },
-                  rightCornerRadius: cornerRadius,
-                  leftCornerRadius: cornerRadius,
-                ),
-              ],
-              child: NotificationTile(
-                key: ValueKey('NotificationTile'),
-                heading: type,
-                dateTime: notifications.first.dateTime,
-                title: notifications.first.title,
-                subtitle: notifications.first.subtitle,
-                height: _containerHeight,
-                color: tileColor,
-                cornerRadius: cornerRadius,
-                padding: EdgeInsets.symmetric(horizontal: padding),
-                titleTextStyle: titleStyle,
-                subtitleTextStyle: subtitleStyle,
-                shadow: shadow,
-              ),
-            ),
-          ),
-          Visibility(
-            visible: notifications.length > 1,
-            child: CollapsedCards(
+            // visible: notifications.length > 1,
+            child: StackedCards(
               onTapClearCallback: onTapClearCallback,
               onTapViewCallback: onTapViewCallback,
               clear: clear,
@@ -189,24 +191,6 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
                 });
               },
             ),
-          ),
-          ExpandedList(
-            type: type,
-            controller: _animationController,
-            containerHeight: _containerHeight,
-            spacing: spacing,
-            initialSpacing: 2 * spacing,
-            notifications: notifications,
-            tileColor: tileColor,
-            cornerRadius: cornerRadius,
-            tilePadding: padding,
-            titleTextStyle: titleStyle,
-            subtitleTextStyle: subtitleStyle,
-            shadow: shadow,
-            clear: clear,
-            view: view,
-            onTapViewCallback: onTapViewCallback,
-            onTapClearCallback: onTapClearCallback,
           ),
         ],
       ),

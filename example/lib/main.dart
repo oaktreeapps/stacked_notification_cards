@@ -49,22 +49,22 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         title: 'OakTree 3',
         subtitle: 'We believe in the power of mobile computing.'),
-    NotificationCard(
-        dateTime: DateTime.now().subtract(const Duration(minutes: 30)),
-        leading: Icon(
-          Icons.account_circle,
-          size: 48,
-        ),
-        title: 'OakTree 4',
-        subtitle: 'We believe in the power of mobile computing.'),
-    NotificationCard(
-        dateTime: DateTime.now().subtract(const Duration(minutes: 44)),
-        leading: Icon(
-          Icons.account_circle,
-          size: 48,
-        ),
-        title: 'OakTree 5',
-        subtitle: 'We believe in the power of mobile computing.'),
+    // NotificationCard(
+    //     dateTime: DateTime.now().subtract(const Duration(minutes: 30)),
+    //     leading: Icon(
+    //       Icons.account_circle,
+    //       size: 48,
+    //     ),
+    //     title: 'OakTree 4',
+    //     subtitle: 'We believe in the power of mobile computing.'),
+    // NotificationCard(
+    //     dateTime: DateTime.now().subtract(const Duration(minutes: 44)),
+    //     leading: Icon(
+    //       Icons.account_circle,
+    //       size: 48,
+    //     ),
+    //     title: 'OakTree 5',
+    //     subtitle: 'We believe in the power of mobile computing.'),
   ];
 
   @override
@@ -77,41 +77,55 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: SingleChildScrollView(
-        child: StackedNotificationCards(
-          type: 'Message',
-          notifications: [..._listOfNotification],
-          cardColor: Color(0xFFF1F1F1),
-          padding: 16,
-          headerTitle: Text(
-            'Notifications',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+        child: Column(
+          children: [
+            StackedNotificationCards(
+              shadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.25),
+                  blurRadius: 2.0,
+                )
+              ],
+              type: 'Message',
+              notifications: [..._listOfNotification],
+              cardColor: Color(0xFFF1F1F1),
+              padding: 16,
+              headerTitle: Text(
+                'Notifications',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              headerShowLess: Text(
+                'Show less',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple,
+                ),
+              ),
+              onTapClearAll: () {
+                print('cleared all');
+              },
+              clearAll: Text('Clear All'),
+              clear: Text('clear'),
+              view: Text('view'),
+              onTapClearCallback: (index) {
+                print(index);
+                setState(() {
+                  _listOfNotification.removeAt(index);
+                });
+              },
+              onTapViewCallback: (index) {
+                print(index);
+              },
             ),
-          ),
-          headerShowLess: Text(
-            'Show less',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
-            ),
-          ),
-          onTapClearAll: () {
-            print('cleared all');
-          },
-          clearAll: Text('Clear All'),
-          clear: Text('clear'),
-          view: Text('view'),
-          onTapClearCallback: (index) {
-            print(index);
-            setState(() {
-              _listOfNotification.removeAt(index);
-            });
-          },
-          onTapViewCallback: (index) {
-            print(index);
-          },
+            Container(
+              height: 200,
+              color: Colors.amber,
+            )
+          ],
         ),
       ),
     );
