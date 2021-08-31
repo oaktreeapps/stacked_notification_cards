@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import 'animated_offset_list.dart';
-
-import 'offset_spacer.dart';
-import 'last_notification_card.dart';
 import '../model/notification_card.dart';
 import '../notification_tile/slid_button.dart';
+import 'animated_offset_list.dart';
 import 'expanded_list.dart';
+import 'last_notification_card.dart';
+import 'offset_spacer.dart';
 
-/// Second widget in the column this widget is responsible
-/// for stacking cards as well showing fan animation,
-/// also shows the list of cards when expanded.
+/// Shows stack of cards
+///
+/// This widget is responsible for showing the stack of cards along with the fan animation on expansion. Also handles [OnTapSlidButtonCallback].
 class StackedCards extends StatelessWidget {
   final AnimationController controller;
   final List<NotificationCard> notifications;

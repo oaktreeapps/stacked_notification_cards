@@ -1,17 +1,19 @@
 library stacked_notification_cards;
 
 import 'package:flutter/material.dart';
+
 import 'src/build_stacked_notification.dart';
-import 'src/stacked_cards/expanded_list.dart';
 import 'src/model/notification_card.dart';
+import 'src/stacked_cards/expanded_list.dart';
+
 export 'src/model/notification_card.dart';
 
 /// This package will let you
 class StackedNotificationCards extends StatelessWidget {
-  /// List of notifications.
+  /// List of notifications to show.
   final List<NotificationCard> notifications;
 
-  /// Color of each tiles.
+  /// Color of each tile.
   final Color cardColor;
 
   /// Corner radius of tiles.

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+
 import '../constants.dart';
 import '../model/notification_card.dart';
 
-/// This widget will be shown at the top of the cards when they
-/// are collapsed. It bascially look identical to NotificationCard
-/// but it animates it's children widgets inside. Also cause the
-/// expand animation when tapped on it.
+/// [LastNotificationCard] is the topmost card on the stack
+
 class LastNotificationCard extends StatelessWidget {
   final AnimationController controller;
   final NotificationCard notification;
@@ -33,7 +32,6 @@ class LastNotificationCard extends StatelessWidget {
     required this.subtitleTextStyle,
     required this.titleTextStyle,
     required this.shadow,
-    // required this.slidableOpened,
     required this.padding,
   }) : super(key: key);
 

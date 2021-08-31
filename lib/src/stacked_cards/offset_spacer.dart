@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../model/notification_card.dart';
 
-// This widget is stacked behind AnimatedOffsetList,
-// might seems useless but it gives
-// height when cards are fans out, otherwise they
-// would overlapped on the following widget.
-// It pushes any following widget down in the list.
-// It animates it's height when the AnimatedOffsetList animates.
-// Will disappear when Expanded List will be shown.
+/// This widget is stacked behind AnimatedOffsetList,
+///might seems useless but it gives
+/// height when cards are fans out, otherwise they
+/// would overlapped on the following widget.
+/// It pushes any following widget down in the list.
+/// It animates it's height when the AnimatedOffsetList animates.
+/// Will disappear when Expanded List will be shown.
 class OffsetSpacer extends StatelessWidget {
   final AnimationController controller;
   final int notificationCount;
