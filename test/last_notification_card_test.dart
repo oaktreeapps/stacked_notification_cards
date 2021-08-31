@@ -16,7 +16,7 @@ void main() {
     expect(lastNotificationCard, findsOneWidget);
 
     await tester.tap(find.byKey(
-      ValueKey('AnimatedOffsetList'),
+      ValueKey('onTapExpand'),
     ));
     await tester.pumpAndSettle();
     expect(lastNotificationCard, findsNothing);

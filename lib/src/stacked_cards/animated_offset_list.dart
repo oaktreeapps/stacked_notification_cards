@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../../stacked_notification_cards.dart';
 import '../notification_tile/notification_tile.dart';
 
+/// This  widget shows all cards are stacked (when collapsed) and animates (fans out)
+/// When tapped on the grouped (stacked) notifications.
+/// will replaced by ExpandedList.
 class AnimatedOffsetList extends StatelessWidget {
   final AnimationController controller;
   final Interval interval;
@@ -36,6 +39,7 @@ class AnimatedOffsetList extends StatelessWidget {
     required this.padding,
   }) : super(key: key);
 
+  /// gives initial value depending on the number of notifications
   double _getInitialValue(int index) {
     final length = notifications.length;
 
@@ -48,6 +52,9 @@ class AnimatedOffsetList extends StatelessWidget {
     }
   }
 
+  /// gives final offset value. This value will be used
+  /// to offset each card when they expanded (while animating)
+  /// offset value is zero for the first (top) card.
   double _finalOffsetValue(int index) {
     final length = notifications.length;
     final double tileHeight = height + spacing;
@@ -59,6 +66,8 @@ class AnimatedOffsetList extends StatelessWidget {
     }
   }
 
+  /// gives initial scale value to scale down initially
+  /// first (top) card will not be scaled
   double _initialScaleValue(int index) {
     final length = notifications.length;
     if (index == length - 1) {
@@ -70,6 +79,8 @@ class AnimatedOffsetList extends StatelessWidget {
     }
   }
 
+  /// gives inital opacity all cards will be transparent
+  /// expect first 3 cards. As they will shown as stacked.
   double _initialOpacityValue(int index) {
     final length = notifications.length;
     if (index == length - 1) {
@@ -83,6 +94,8 @@ class AnimatedOffsetList extends StatelessWidget {
     }
   }
 
+  /// gives Tween animation offset value to offset each card
+  /// from inital to final.
   Offset _tileOffset(int index) {
     return Tween(
             begin: Offset(0, _getInitialValue(index)),
@@ -93,6 +106,8 @@ class AnimatedOffsetList extends StatelessWidget {
         .value;
   }
 
+  /// gives Tween animation scale value to scale each card
+  /// from inital to final.
   double _tileScale(int index) {
     return Tween(begin: _initialScaleValue(index), end: 1.0)
         .animate(
@@ -101,6 +116,8 @@ class AnimatedOffsetList extends StatelessWidget {
         .value;
   }
 
+  /// gives Tween animation opacity value to make transparent
+  /// each card from inital to final.
   double _tileOpacity(int index) {
     return Tween(begin: _initialOpacityValue(index), end: 1.0)
         .animate(
@@ -109,8 +126,9 @@ class AnimatedOffsetList extends StatelessWidget {
         .value;
   }
 
-// This required to replace the last card from this list
-//with the LastNotificationCard
+  /// This required to replace the last card from this list
+  /// with the LastNotificationCard. There wise there will be two
+  /// cards shown at the top.
   bool _lastCardVisibility(int index) {
     final length = notifications.length;
     if (index == length - 1 && controller.value <= 0.4) {

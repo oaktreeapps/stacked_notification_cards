@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import '../constants.dart';
-import 'slid_button.dart';
 
-typedef Widget SlidButtonWidgetBuilder(int index);
 
+
+
+/// This widget is the card actually and responsible for 
+/// structuring the card.
 class NotificationTile extends StatelessWidget {
   final String heading;
   final DateTime dateTime;
@@ -19,9 +20,7 @@ class NotificationTile extends StatelessWidget {
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? shadow;
-  // final Widget view;
 
-  // final SlidButtonWidgetBuilder clear;
 
   const NotificationTile({
     Key? key,

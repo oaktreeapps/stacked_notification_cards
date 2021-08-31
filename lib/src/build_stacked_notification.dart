@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'stacked_cards/stacked_cards.dart';
 import 'stacked_cards/expanded_list.dart';
 
@@ -17,7 +16,6 @@ class BuildStackedNotification extends StatefulWidget {
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? shadow;
   final VoidCallback onTapClearAll;
-  // final Widget clearAll;
   final Widget view;
   final Widget clear;
   final OnTapSlidButtonCallback onTapViewCallback;
@@ -39,7 +37,6 @@ class BuildStackedNotification extends StatefulWidget {
     required this.subtitleTextStyle,
     required this.shadow,
     required this.onTapClearAll,
-    // required this.clearAll,
     required this.clear,
     required this.view,
     required this.onTapClearCallback,
@@ -60,7 +57,6 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
   late AnimationController _animationController;
 
   final double _containerHeight = 140;
-  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -83,8 +79,6 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     final subtitleStyle = widget.subtitleTextStyle;
     final shadow = widget.shadow;
     final onTapClearAll = widget.onTapClearAll;
-    // final clearAll = widget.clearAll;
-
     final view = widget.view;
     final clear = widget.clear;
     final onTapViewCallback = widget.onTapViewCallback;
@@ -94,8 +88,8 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     final headerClearAll = widget.headerClearAllButton;
     final clearAllStacked = widget.clearAllStacked;
 
+    /// needs to sort to show the list in ascending date order
     notifications.sort((a, b) => a.dateTime.compareTo(b.dateTime));
-    // notifications.sort((a, b) => b.dateTime.compareTo(a.dateTime));
 
     return AnimatedBuilder(
       animation: _animationController,
@@ -112,12 +106,6 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
             notificationCount: notifications.length,
             clearAll: headerClearAll,
             onTapClearAll: onTapClearAll,
-            onTapShowLess: () {
-              setState(() {
-                _isExpanded = false;
-              });
-              _animationController.reverse();
-            },
           ),
           StackedCards(
             onTapClearCallback: onTapClearCallback,
@@ -132,7 +120,6 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
             containerHeight: _containerHeight,
             spacing: spacing,
             maxSpacing: 2 * spacing,
-            isExpaned: _isExpanded,
             containerColor: tileColor,
             cornerRadius: cornerRadius,
             padding: padding,
@@ -140,13 +127,6 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
             subtitleTextStyle: subtitleStyle,
             shadow: shadow,
             onTapClearAll: onTapClearAll,
-            // clearAll: clearAll,
-            onTapShowMore: () async {
-              await _animationController.forward();
-              setState(() {
-                _isExpanded = true;
-              });
-            },
           ),
         ],
       ),

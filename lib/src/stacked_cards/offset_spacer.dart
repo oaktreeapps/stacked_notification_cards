@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
 import '../model/notification_card.dart';
 
-
-//This sized box to create a fake height,
-//and push any following widget down in the list.
+// This widget is stacked behind AnimatedOffsetList,
+// might seems useless but it gives
+// height when cards are fans out, otherwise they
+// would overlapped on the following widget.
+// It pushes any following widget down in the list.
+// It animates it's height when the AnimatedOffsetList animates.
+// Will disappear when Expanded List will be shown.
 class OffsetSpacer extends StatelessWidget {
   final AnimationController controller;
-  final List<NotificationCard> notifications;
+  final int notificationCount;
   final double height;
   final double spacing;
   final double padding;
   const OffsetSpacer({
     Key? key,
     required this.controller,
-    required this.notifications,
+    required this.notificationCount,
     required this.height,
     required this.spacing,
     required this.padding,
   }) : super(key: key);
 
+// This method gives initial height depending on
+// number of notification.
   double _getInitialHeight() {
-    final length = notifications.length;
+    final length = notificationCount;
     if (length == 1) {
       return padding;
     } else if (length == 2) {
@@ -39,7 +45,7 @@ class OffsetSpacer extends StatelessWidget {
         key: ValueKey('SpacerSizedBox'),
         height: Tween<double>(
           begin: _getInitialHeight(),
-          end: notifications.length * (height + spacing),
+          end: notificationCount * (height + spacing),
         )
             .animate(
               CurvedAnimation(

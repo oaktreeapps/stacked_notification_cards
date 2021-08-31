@@ -4,11 +4,14 @@ import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../model/notification_card.dart';
 
+/// This widget will be shown at the top of the cards when they 
+/// are collapsed. It bascially look identical to NotificationCard
+/// but it animates it's children widgets inside. Also cause the 
+/// expand animation when tapped on it.
 class LastNotificationCard extends StatelessWidget {
   final AnimationController controller;
   final NotificationCard notification;
   final int totalCount;
-  final VoidCallback onTapExpand;
   final double cornerRadius;
   final Color color;
   final double height;
@@ -16,7 +19,6 @@ class LastNotificationCard extends StatelessWidget {
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? shadow;
-  // final bool slidableOpened;
   final double padding;
 
   const LastNotificationCard({
@@ -24,7 +26,6 @@ class LastNotificationCard extends StatelessWidget {
     required this.controller,
     required this.notification,
     required this.totalCount,
-    required this.onTapExpand,
     required this.color,
     required this.cornerRadius,
     required this.height,
@@ -44,7 +45,7 @@ class LastNotificationCard extends StatelessWidget {
         key: ValueKey('onTapExpand'),
         onTap: () {
           Slidable.of(context)?.close();
-          onTapExpand();
+           controller.forward();
         },
         child: Container(
           key: ValueKey('LastNotificationCard'),
@@ -54,10 +55,6 @@ class LastNotificationCard extends StatelessWidget {
             color: color,
             borderRadius: BorderRadius.circular(cornerRadius),
             boxShadow: shadow,
-            // border: Border.all(
-            //   color: Colors.black.withOpacity(0.2),
-            //   width: 1.4,
-            // ),
           ),
           child: Stack(
             children: [
@@ -182,14 +179,6 @@ class LastNotificationCard extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // child: MoreNotificationButton(
-                //   key: ValueKey('MoreNotificationButton'),
-                //   controller: controller,
-                //   onTapExpand: onTapExpand,
-                //   totalCount: totalCount,
-                //   // slidableOpened: slidableOpened,
-                // ),
               ),
             ],
           ),
@@ -198,28 +187,3 @@ class LastNotificationCard extends StatelessWidget {
     );
   }
 }
-
-// class MoreNotificationButton extends StatelessWidget {
-//   final VoidCallback onTapExpand;
-//   final AnimationController controller;
-//   final int totalCount;
-//   // final bool slidableOpened;
-//   const MoreNotificationButton({
-//     Key? key,
-//     required this.onTapExpand,
-//     required this.controller,
-//     required this.totalCount,
-//     // required this.slidableOpened,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         Slidable.of(context)?.close();
-//         onTapExpand();
-//       },
-//       child: ,
-//     );
-//   }
-// }

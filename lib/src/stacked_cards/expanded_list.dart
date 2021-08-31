@@ -7,6 +7,8 @@ import '../notification_tile/slid_button.dart';
 
 typedef void OnTapSlidButtonCallback(int index);
 
+/// This widget is shown after animating AnimatedList.
+/// show all cards in a column, has option to slide each card.
 class ExpandedList extends StatelessWidget {
   final List<NotificationCard> notifications;
   final AnimationController controller;
@@ -25,7 +27,6 @@ class ExpandedList extends StatelessWidget {
   final Widget clear;
   final OnTapSlidButtonCallback onTapViewCallback;
   final OnTapSlidButtonCallback onTapClearCallback;
-
 
   const ExpandedList({
     Key? key,
@@ -46,9 +47,12 @@ class ExpandedList extends StatelessWidget {
     required this.onTapClearCallback,
     required this.onTapViewCallback,
     required this.endPadding,
-
   }) : super(key: key);
 
+  /// determines whether to show the ExpandedList or not
+  /// when AnimatedOffsetList is shown this widget will not be shown.
+  /// when there is only one notification then ExpandedList will
+  /// always be shown.
   bool _getListVisibility(int length) {
     if (length == 1) {
       return true;
@@ -59,6 +63,8 @@ class ExpandedList extends StatelessWidget {
     }
   }
 
+  /// The padding that will be shown at the bottom of
+  /// all card, basically bottom padding of ExpandedList
   double _getEndPadding(int index) {
     if (index == notifications.length - 1) {
       return endPadding;
@@ -67,6 +73,8 @@ class ExpandedList extends StatelessWidget {
     }
   }
 
+  /// Spacing of between two cards this value used
+  /// to add padding under each SlidButton
   double _getSpacing(int index, double topSpace) {
     if (index == 0) {
       return 0;
@@ -75,6 +83,10 @@ class ExpandedList extends StatelessWidget {
     }
   }
 
+  /// top paddig of each cards initial padding will
+  /// be same as AnimatedOffsetList inter card spacing
+  /// then it will shrink (while animating). This will
+  /// give bounce animation when cards are expand.
   double _topPadding(int index) {
     return Tween<double>(
             begin: _getSpacing(index, initialSpacing),
@@ -103,7 +115,7 @@ class ExpandedList extends StatelessWidget {
                 final index = reversedList.indexOf(notification);
                 return BuildWithAnimation(
                   key: ValueKey(notification.dateTime),
-                  slidKey: ValueKey(notification.dateTime),
+                  // slidKey: ValueKey(notification.dateTime),
                   onTapView: onTapViewCallback,
                   view: view,
                   clear: clear,
@@ -145,6 +157,8 @@ class ExpandedList extends StatelessWidget {
   }
 }
 
+/// This widget is used to animate each card when tapped
+/// on clear button.
 class BuildWithAnimation extends StatefulWidget {
   final Widget child;
   final double cornerRadius;
@@ -159,7 +173,7 @@ class BuildWithAnimation extends StatefulWidget {
   final double spacing;
   final double tilePadding;
   final Widget view;
-  final Key slidKey;
+  // final Key slidKey;
 
   const BuildWithAnimation({
     Key? key,
@@ -176,7 +190,7 @@ class BuildWithAnimation extends StatefulWidget {
     required this.tilePadding,
     required this.onTapView,
     required this.view,
-    required this.slidKey,
+    // required this.slidKey,
   }) : super(key: key);
 
   @override

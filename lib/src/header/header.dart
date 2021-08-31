@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+// This widget will be shown at the top. It has title.
+// and two buttons one is to 'showLess' another is to 'clear all'
+// when expanded
 class Header extends StatelessWidget {
   final AnimationController controller;
-  final VoidCallback onTapShowLess;
   final double padding;
   final double spacing;
   final Widget showLess;
@@ -14,7 +16,6 @@ class Header extends StatelessWidget {
   const Header({
     Key? key,
     required this.controller,
-    required this.onTapShowLess,
     required this.padding,
     required this.spacing,
     required this.title,
@@ -47,8 +48,11 @@ class Header extends StatelessWidget {
           Expanded(
             child: SizedBox(),
           ),
+          // showLess button
           GestureDetector(
-            onTap: onTapShowLess,
+            onTap: () {
+              controller.reverse();
+            },
             child: Visibility(
               visible: notificationCount > 1,
               child: Opacity(
@@ -57,9 +61,9 @@ class Header extends StatelessWidget {
               ),
             ),
           ),
+          // clear all button
           GestureDetector(
             onTap: onTapClearAll,
-            // padding: const EdgeInsets.all(8.0),
             child: Visibility(
               visible: notificationCount > 1,
               child: Opacity(
