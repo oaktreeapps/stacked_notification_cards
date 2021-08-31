@@ -54,8 +54,8 @@ class StackedCards extends StatelessWidget {
     required this.clearAllStacked,
   }) : super(key: key);
 
-/// This method gives the bottom padding that is used
-/// for 'Clear All' bottom when stacked cards are slide
+  /// This method gives the bottom padding that is used
+  /// for 'Clear All' bottom when stacked cards are slide
 
   double _getSlidButtonPadding() {
     final length = notifications.length;

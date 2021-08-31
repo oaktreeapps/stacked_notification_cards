@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../constants.dart';
 
-
-
-
-/// This widget is the card actually and responsible for 
+/// This widget is the card actually and responsible for
 /// structuring the card.
 class NotificationTile extends StatelessWidget {
   final String heading;
@@ -20,7 +17,6 @@ class NotificationTile extends StatelessWidget {
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? shadow;
-
 
   const NotificationTile({
     Key? key,

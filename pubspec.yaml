@@ -1,10 +1,9 @@
 name: stacked_notification_cards
-description: This package gives iOS style stacked notification. And expand with a cool animaiton. It's also possible to slid each notificion or when they are grouped.
+description: This package gives iOS style stacked notifications. And expand with a cool fan animation. It's also possible to slide each notification or when they are grouped.
+repository: https://github.com/OakTree-Apps/stacked_notification_cards
 
-publish_to: 'none' 
 
-
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

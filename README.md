@@ -1,6 +1,6 @@
 # stacked_notification_cards
 
-<img src="https://raw.githubusercontent.com/OakTree-Apps/stacked_notification_cards/main/assets/demo_record.gif"  width="500"/>
+<img src="https://raw.githubusercontent.com/OakTree-Apps/stacked_notification_cards/main/assets/demo_record.gif"  width="300"/>
 
 ### Features
 1. Given notifications are grouped like iOS

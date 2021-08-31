@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../model/notification_card.dart';
 
-/// This widget will be shown at the top of the cards when they 
+/// This widget will be shown at the top of the cards when they
 /// are collapsed. It bascially look identical to NotificationCard
-/// but it animates it's children widgets inside. Also cause the 
+/// but it animates it's children widgets inside. Also cause the
 /// expand animation when tapped on it.
 class LastNotificationCard extends StatelessWidget {
   final AnimationController controller;
@@ -45,7 +45,7 @@ class LastNotificationCard extends StatelessWidget {
         key: ValueKey('onTapExpand'),
         onTap: () {
           Slidable.of(context)?.close();
-           controller.forward();
+          controller.forward();
         },
         child: Container(
           key: ValueKey('LastNotificationCard'),
