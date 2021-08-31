@@ -49,22 +49,22 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         title: 'OakTree 3',
         subtitle: 'We believe in the power of mobile computing.'),
-    // NotificationCard(
-    //     dateTime: DateTime.now().subtract(const Duration(minutes: 30)),
-    //     leading: Icon(
-    //       Icons.account_circle,
-    //       size: 48,
-    //     ),
-    //     title: 'OakTree 4',
-    //     subtitle: 'We believe in the power of mobile computing.'),
-    // NotificationCard(
-    //     dateTime: DateTime.now().subtract(const Duration(minutes: 44)),
-    //     leading: Icon(
-    //       Icons.account_circle,
-    //       size: 48,
-    //     ),
-    //     title: 'OakTree 5',
-    //     subtitle: 'We believe in the power of mobile computing.'),
+    NotificationCard(
+        dateTime: DateTime.now().subtract(const Duration(minutes: 30)),
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
+        title: 'OakTree 4',
+        subtitle: 'We believe in the power of mobile computing.'),
+    NotificationCard(
+        dateTime: DateTime.now().subtract(const Duration(minutes: 44)),
+        leading: Icon(
+          Icons.account_circle,
+          size: 48,
+        ),
+        title: 'OakTree 5',
+        subtitle: 'We believe in the power of mobile computing.'),
   ];
 
   @override
@@ -106,9 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               onTapClearAll: () {
-                print('cleared all');
+                setState(() {
+                  _listOfNotification.clear();
+                });
               },
-              clearAll: Text('Clear All'),
+              headerClearAllButton: Icon(Icons.close),
+              clearAllStacked: Text('Clear All'),
               clear: Text('clear'),
               view: Text('view'),
               onTapClearCallback: (index) {

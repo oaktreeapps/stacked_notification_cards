@@ -17,8 +17,6 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(BaseStructure(
       list: [],
-      // cardColor: Colors.white,
-      // notifications: [],
     ));
 
     expect(
@@ -47,10 +45,6 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(BaseStructure(
       list: [],
-      // child: StackedNotificationCards(
-      //   cardColor: Colors.white,
-      //   notifications: [],
-      // ),
     ));
 
     final Finder sizedBox = find.byKey(ValueKey('EmptySizedBox'));
@@ -61,11 +55,7 @@ void main() {
   testWidgets('Expecting BuildStackedNotification when the list is not empty.',
       (WidgetTester tester) async {
     await tester.pumpWidget(BaseStructure(
-      list:dataList1,
-      // child: StackedNotificationCards(
-      //   cardColor: Colors.white,
-      //   notifications: dataList1,
-      // ),
+      list: dataList1,
     ));
 
     final Finder buildStackedNotification = find.byKey(
@@ -76,12 +66,7 @@ void main() {
   });
 
   testWidgets('Ticker has been disposed.', (WidgetTester tester) async {
-    await tester.pumpWidget(BaseStructure( list: dataList1
-      // child: StackedNotificationCards(
-      //   cardColor: Colors.white,
-      //   notifications: dataList1,
-      // ),
-    ));
+    await tester.pumpWidget(BaseStructure(list: dataList1));
 
     tester.verifyTickersWereDisposed();
   });
@@ -89,10 +74,6 @@ void main() {
   testWidgets('Showing header', (WidgetTester tester) async {
     await tester.pumpWidget(BaseStructure(
       list: dataList1,
-      // child: StackedNotificationCards(
-      //   cardColor: Colors.white,
-      //   notifications: dataList1,
-      // ),
     ));
 
     final Finder notificationTile = find.byKey(
@@ -102,48 +83,33 @@ void main() {
     expect(notificationTile, findsOneWidget);
   });
 
-  testWidgets('Show notification tile when there is one notification',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(
-      BaseStructure(
-        list: dataList1,
-        // child: StackedNotificationCards(
-        //   cardColor: Colors.white,
-        //   notifications: dataList1,
-        // ),
-      ),
-    );
+  // testWidgets('Show notification tile when there is one notification',
+  //     (WidgetTester tester) async {
+  //   await tester.pumpWidget(
+  //     BaseStructure(
+  //       list: dataList1,
+  //     ),
+  //   );
 
-    final Finder notificationTile = find.byKey(
-      ValueKey('NotificationTile'),
-    );
+  //   final Finder notificationTile = find.byKey(
+  //     ValueKey('NotificationTile'),
+  //   );
 
-    expect(notificationTile, findsOneWidget);
-  });
+  //   expect(notificationTile, findsOneWidget);
+  // });
 
-  testWidgets('Show CollapsedCards when there are more than one notification',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(
-      BaseStructure(
-        list: dataList2,
-        // child: StackedNotificationCards(
-        //   cardColor: Colors.white,
-        //   notifications: dataList2,
-        //   type: 'Message',
-        //   onTapClearAll: () {},
-        //   clearAll: Text('Clear All'),
-        //   clear: Text('clear'),
-        //   view: Text('view'),
-        //   onTapClearCallback: (index) {},
-        //   onTapViewCallback: (index) {},
-        // ),
-      ),
-    );
+  // testWidgets('Show CollapsedCards when there are more than one notification',
+  //     (WidgetTester tester) async {
+  //   await tester.pumpWidget(
+  //     BaseStructure(
+  //       list: dataList2,
+  //     ),
+  //   );
 
-    final Finder collapsedCards = find.byKey(
-      ValueKey('CollapsedCards'),
-    );
+  //   final Finder collapsedCards = find.byKey(
+  //     ValueKey('CollapsedCards'),
+  //   );
 
-    expect(collapsedCards, findsOneWidget);
-  });
+  //   expect(collapsedCards, findsOneWidget);
+  // });
 }

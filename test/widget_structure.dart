@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../lib/stacked_notification_cards.dart';
 import '../lib/src/model/notification_card.dart';
+
 class BaseStructure extends StatelessWidget {
   // final Widget child;
   final List<NotificationCard> list;
@@ -15,7 +16,8 @@ class BaseStructure extends StatelessWidget {
         notifications: list,
         type: 'Message',
         onTapClearAll: () {},
-        clearAll: Text('Clear All'),
+        clearAllStacked: Text('Clear All'),
+        headerClearAllButton: Icon(Icons.close),
         clear: Text('clear'),
         view: Text('view'),
         headerShowLess: Text(''),

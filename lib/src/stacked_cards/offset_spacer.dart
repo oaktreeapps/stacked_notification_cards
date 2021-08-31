@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import '../model/notification_card.dart';
 
+
+//This sized box to create a fake height,
+//and push any following widget down in the list.
 class OffsetSpacer extends StatelessWidget {
   final AnimationController controller;
   final List<NotificationCard> notifications;
   final double height;
   final double spacing;
   final double padding;
-  final initialHeight;
   const OffsetSpacer({
     Key? key,
     required this.controller,
     required this.notifications,
     required this.height,
     required this.spacing,
-    required this.initialHeight,
     required this.padding,
   }) : super(key: key);
 
@@ -34,6 +35,7 @@ class OffsetSpacer extends StatelessWidget {
     return Visibility(
       visible: controller.value <= 0.8,
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: padding),
         key: ValueKey('SpacerSizedBox'),
         height: Tween<double>(
           begin: _getInitialHeight(),

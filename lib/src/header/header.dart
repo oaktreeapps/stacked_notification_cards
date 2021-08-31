@@ -7,6 +7,9 @@ class Header extends StatelessWidget {
   final double spacing;
   final Widget showLess;
   final Widget title;
+  final Widget clearAll;
+  final VoidCallback onTapClearAll;
+  final int notificationCount;
 
   const Header({
     Key? key,
@@ -16,6 +19,9 @@ class Header extends StatelessWidget {
     required this.spacing,
     required this.title,
     required this.showLess,
+    required this.clearAll,
+    required this.onTapClearAll,
+    required this.notificationCount,
   }) : super(key: key);
 
   @override
@@ -35,24 +41,33 @@ class Header extends StatelessWidget {
         spacing,
       ),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-         title,
+          title,
           Expanded(
             child: SizedBox(),
           ),
           GestureDetector(
             onTap: onTapShowLess,
-            child: Opacity(
-              opacity: opacity.value,
-              child: showLess,
+            child: Visibility(
+              visible: notificationCount > 1,
+              child: Opacity(
+                opacity: opacity.value,
+                child: showLess,
+              ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Icon(Icons.close_rounded),
-          // )
+          GestureDetector(
+            onTap: onTapClearAll,
+            // padding: const EdgeInsets.all(8.0),
+            child: Visibility(
+              visible: notificationCount > 1,
+              child: Opacity(
+                opacity: opacity.value,
+                child: clearAll,
+              ),
+            ),
+          )
         ],
       ),
     );

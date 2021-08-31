@@ -15,6 +15,7 @@ class AnimatedOffsetList extends StatelessWidget {
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? shadow;
+  final double padding;
 
   final Interval opacityInterval;
 
@@ -31,8 +32,8 @@ class AnimatedOffsetList extends StatelessWidget {
     required this.titleTextStyle,
     required this.subtitleTextStyle,
     required this.shadow,
-
     required this.opacityInterval,
+    required this.padding,
   }) : super(key: key);
 
   double _getInitialValue(int index) {
@@ -121,42 +122,44 @@ class AnimatedOffsetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final updatedNotifications = List.of(notifications);
-    // updatedNotifications.removeAt(0);
-
-    return Stack(
-      children: [
-        ...notifications.map(
-          (notification) {
-            final index = notifications.indexOf(notification);
-            return Transform.translate(
-              offset: _tileOffset(index),
-              child: Transform.scale(
-                alignment: Alignment.bottomCenter,
-                scale: _tileScale(index),
-                child: Opacity(
-                  opacity: _tileOpacity(index),
-                  child: Visibility(
-                    visible: _lastCardVisibility(index),
-                    child: NotificationTile(
-                      heading: type,
-                      dateTime: notification.dateTime,
-                      title: notification.title,
-                      subtitle: notification.subtitle,
-                      height: height,
-                      color: tileColor,
-                      cornerRadius: cornerRadius,
-                      titleTextStyle: titleTextStyle,
-                      subtitleTextStyle: subtitleTextStyle,
-                      shadow: shadow,
+    return Visibility(
+      visible: notifications.length > 1 && controller.value <= 0.8,
+      child: Stack(
+        key: ValueKey('AnimatedOffsetList'),
+        children: [
+          ...notifications.map(
+            (notification) {
+              final index = notifications.indexOf(notification);
+              return Transform.translate(
+                offset: _tileOffset(index),
+                child: Transform.scale(
+                  alignment: Alignment.bottomCenter,
+                  scale: _tileScale(index),
+                  child: Opacity(
+                    opacity: _tileOpacity(index),
+                    child: Visibility(
+                      visible: _lastCardVisibility(index),
+                      child: NotificationTile(
+                        heading: type,
+                        dateTime: notification.dateTime,
+                        title: notification.title,
+                        subtitle: notification.subtitle,
+                        height: height,
+                        color: tileColor,
+                        cornerRadius: cornerRadius,
+                        titleTextStyle: titleTextStyle,
+                        subtitleTextStyle: subtitleTextStyle,
+                        shadow: shadow,
+                        padding: EdgeInsets.symmetric(horizontal: padding),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-        )
-      ],
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 }

@@ -5,8 +5,6 @@ import 'stacked_cards/expanded_list.dart';
 
 import 'header/header.dart';
 import 'model/notification_card.dart';
-import 'notification_tile/notification_tile.dart';
-import 'notification_tile/slid_button.dart';
 
 class BuildStackedNotification extends StatefulWidget {
   final List<NotificationCard> notifications;
@@ -19,14 +17,15 @@ class BuildStackedNotification extends StatefulWidget {
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? shadow;
   final VoidCallback onTapClearAll;
-  final Widget clearAll;
+  // final Widget clearAll;
   final Widget view;
   final Widget clear;
   final OnTapSlidButtonCallback onTapViewCallback;
   final OnTapSlidButtonCallback onTapClearCallback;
   final Widget headerTitle;
   final Widget headerShowLess;
-  // final Widget headerClearAll;
+  final Widget headerClearAllButton;
+  final Widget clearAllStacked;
 
   BuildStackedNotification({
     Key? key,
@@ -40,13 +39,14 @@ class BuildStackedNotification extends StatefulWidget {
     required this.subtitleTextStyle,
     required this.shadow,
     required this.onTapClearAll,
-    required this.clearAll,
+    // required this.clearAll,
     required this.clear,
     required this.view,
     required this.onTapClearCallback,
     required this.onTapViewCallback,
     required this.headerTitle,
-    // required this.headerClearAll,
+    required this.headerClearAllButton,
+    required this.clearAllStacked,
     required this.headerShowLess,
   }) : super(key: key);
 
@@ -83,7 +83,7 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     final subtitleStyle = widget.subtitleTextStyle;
     final shadow = widget.shadow;
     final onTapClearAll = widget.onTapClearAll;
-    final clearAll = widget.clearAll;
+    // final clearAll = widget.clearAll;
 
     final view = widget.view;
     final clear = widget.clear;
@@ -91,7 +91,8 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     final onTapClearCallback = widget.onTapClearCallback;
     final headerTitle = widget.headerTitle;
     final headerShowLess = widget.headerShowLess;
-    // final headerClearAll = widget.headerClearAll;
+    final headerClearAll = widget.headerClearAllButton;
+    final clearAllStacked = widget.clearAllStacked;
 
     notifications.sort((a, b) => a.dateTime.compareTo(b.dateTime));
     // notifications.sort((a, b) => b.dateTime.compareTo(a.dateTime));
@@ -108,6 +109,9 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
             padding: padding,
             title: headerTitle,
             showLess: headerShowLess,
+            notificationCount: notifications.length,
+            clearAll: headerClearAll,
+            onTapClearAll: onTapClearAll,
             onTapShowLess: () {
               setState(() {
                 _isExpanded = false;
@@ -115,82 +119,34 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
               _animationController.reverse();
             },
           ),
-          // Visibility(
-          //   visible: notifications.length == 1,
-          //   child: Slidable(
-          //     actionPane: SlidableBehindActionPane(),
-          //     secondaryActions: [
-          //       SlidButton(
-          //         padding: EdgeInsets.fromLTRB(0, 0, padding, 0),
-          //         color: tileColor,
-          //         shadow: shadow,
-          //         height: _containerHeight,
-          //         child: view,
-          //         onTapButton: () {
-          //           onTapViewCallback(0);
-          //         },
-          //         leftCornerRadius: cornerRadius,
-          //         rightCornerRadius: cornerRadius,
-          //       ),
-          //       SlidButton(
-          //         padding: EdgeInsets.fromLTRB(0, 0, padding, 0),
-          //         color: tileColor,
-          //         shadow: shadow,
-          //         height: _containerHeight,
-          //         child: clear,
-          //         onTapButton: () {
-          //           onTapClearCallback(0);
-          //         },
-          //         rightCornerRadius: cornerRadius,
-          //         leftCornerRadius: cornerRadius,
-          //       ),
-          //     ],
-          //     child: NotificationTile(
-          //       key: ValueKey('NotificationTile'),
-          //       heading: type,
-          //       dateTime: notifications.first.dateTime,
-          //       title: notifications.first.title,
-          //       subtitle: notifications.first.subtitle,
-          //       height: _containerHeight,
-          //       color: tileColor,
-          //       cornerRadius: cornerRadius,
-          //       padding: EdgeInsets.symmetric(horizontal: padding),
-          //       titleTextStyle: titleStyle,
-          //       subtitleTextStyle: subtitleStyle,
-          //       shadow: shadow,
-          //     ),
-          //   ),
-          // ),
-          Visibility(
-            // visible: notifications.length > 1,
-            child: StackedCards(
-              onTapClearCallback: onTapClearCallback,
-              onTapViewCallback: onTapViewCallback,
-              clear: clear,
-              view: view,
-              key: ValueKey('CollapsedCards'),
-              type: type,
-              controller: _animationController,
-              notifications: notifications,
-              containerHeight: _containerHeight,
-              spacing: spacing,
-              maxSpacing: 2 * spacing,
-              isExpaned: _isExpanded,
-              containerColor: tileColor,
-              cornerRadius: cornerRadius,
-              padding: padding,
-              titleTextStyle: titleStyle,
-              subtitleTextStyle: subtitleStyle,
-              shadow: shadow,
-              onTapClearAll: onTapClearAll,
-              clearAll: clearAll,
-              onTapShowMore: () async {
-                await _animationController.forward();
-                setState(() {
-                  _isExpanded = true;
-                });
-              },
-            ),
+          StackedCards(
+            onTapClearCallback: onTapClearCallback,
+            onTapViewCallback: onTapViewCallback,
+            clear: clear,
+            view: view,
+            clearAllStacked: clearAllStacked,
+            key: ValueKey('CollapsedCards'),
+            type: type,
+            controller: _animationController,
+            notifications: notifications,
+            containerHeight: _containerHeight,
+            spacing: spacing,
+            maxSpacing: 2 * spacing,
+            isExpaned: _isExpanded,
+            containerColor: tileColor,
+            cornerRadius: cornerRadius,
+            padding: padding,
+            titleTextStyle: titleStyle,
+            subtitleTextStyle: subtitleStyle,
+            shadow: shadow,
+            onTapClearAll: onTapClearAll,
+            // clearAll: clearAll,
+            onTapShowMore: () async {
+              await _animationController.forward();
+              setState(() {
+                _isExpanded = true;
+              });
+            },
           ),
         ],
       ),

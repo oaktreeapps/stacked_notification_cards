@@ -38,8 +38,13 @@ class StackedNotificationCards extends StatelessWidget {
   /// Callback when clear all button pressed.
   final VoidCallback onTapClearAll;
 
-  /// When stacked notification are slid this widget will show.
-  final Widget clearAll;
+  /// This widget is show the top-right after headerShowLess. Visible when the
+  /// cards are expanded.
+  final Widget headerClearAllButton;
+
+  /// When notifications are stacked this widget is shown behind the card.
+  /// visible when the card is slide
+  final Widget clearAllStacked;
 
   /// This widget is shown at the top-left of all notifications
   final Widget headerTitle;
@@ -47,9 +52,16 @@ class StackedNotificationCards extends StatelessWidget {
   /// This widget is shown at the top-right of all notifications and has onTapClearAll callback.
   final Widget headerShowLess;
 
+  /// View widget when card is slide
   final Widget view;
+
+  /// Clear widget when card is slide
   final Widget clear;
+
+  /// Callback when tapped on view widget after sliding card.
   final OnTapSlidButtonCallback onTapViewCallback;
+
+  /// Callback when tapped on clear widget after sliding card.
   final OnTapSlidButtonCallback onTapClearCallback;
 
   const StackedNotificationCards({
@@ -58,7 +70,8 @@ class StackedNotificationCards extends StatelessWidget {
     required this.cardColor,
     required this.type,
     required this.onTapClearAll,
-    required this.clearAll,
+    required this.headerClearAllButton,
+    required this.clearAllStacked,
     required this.clear,
     required this.view,
     required this.onTapClearCallback,
@@ -88,7 +101,8 @@ class StackedNotificationCards extends StatelessWidget {
         subtitleTextStyle: subtitleTextStyle,
         shadow: shadow,
         onTapClearAll: onTapClearAll,
-        clearAll: clearAll,
+        headerClearAllButton: headerClearAllButton,
+        clearAllStacked: clearAllStacked,
         clear: clear,
         view: view,
         onTapViewCallback: onTapViewCallback,

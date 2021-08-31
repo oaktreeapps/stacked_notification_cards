@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+typedef void OnTapSlidButton(BuildContext context);
+
 class SlidButton extends StatelessWidget {
   final Color color;
   final double? leftCornerRadius;
@@ -7,7 +9,7 @@ class SlidButton extends StatelessWidget {
   final List<BoxShadow>? shadow;
   final double height;
   final Widget child;
-  final VoidCallback onTapButton;
+  final OnTapSlidButton onTapButton;
   final EdgeInsets padding;
   const SlidButton({
     Key? key,
@@ -29,18 +31,23 @@ class SlidButton extends StatelessWidget {
     final rightRadius = rightCornerRadius != null
         ? Radius.circular(rightCornerRadius!)
         : Radius.zero;
-    return GestureDetector(
-      onTap: onTapButton,
-      child: Container(
-        margin: padding,
-        height: height,
-        alignment: Alignment.center,
-        child: child,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.horizontal(
-            left: leftRadius,
-            right: rightRadius,
+    return Expanded(
+      flex: 1,
+      child: SizedBox.expand(
+        child: GestureDetector(
+          onTap: ()  =>  onTapButton(context),
+          child: Container(
+            margin: padding,
+            height: height,
+            alignment: Alignment.center,
+            child: child,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.horizontal(
+                left: leftRadius,
+                right: rightRadius,
+              ),
+            ),
           ),
         ),
       ),
