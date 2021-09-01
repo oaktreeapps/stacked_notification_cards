@@ -3,7 +3,7 @@ description: This package gives iOS style stacked notifications. And expand with
 repository: https://github.com/OakTree-Apps/stacked_notification_cards
 
 
-version: 0.0.1+1
+version: 0.1.0-dev.1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
