@@ -30,7 +30,7 @@ void main() {
         tester
             .widget<StackedNotificationCards>(
                 find.byType(StackedNotificationCards))
-            .cornerRadius,
+            .cardCornerRadius,
         8);
 
     expect(

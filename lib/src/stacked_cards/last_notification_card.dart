@@ -14,10 +14,10 @@ class LastNotificationCard extends StatelessWidget {
   final double cornerRadius;
   final Color color;
   final double height;
-  final String type;
+  final String notificationCardTitle;
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
   final double padding;
 
   const LastNotificationCard({
@@ -28,10 +28,10 @@ class LastNotificationCard extends StatelessWidget {
     required this.color,
     required this.cornerRadius,
     required this.height,
-    required this.type,
+    required this.notificationCardTitle,
     required this.subtitleTextStyle,
     required this.titleTextStyle,
-    required this.shadow,
+    required this.boxShadow,
     required this.padding,
   }) : super(key: key);
 
@@ -52,7 +52,7 @@ class LastNotificationCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(cornerRadius),
-            boxShadow: shadow,
+            boxShadow: boxShadow,
           ),
           child: Stack(
             children: [
@@ -74,13 +74,13 @@ class LastNotificationCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          type,
+                          notificationCardTitle,
                           style: kCardTopTextStyle,
                           maxLines: 1,
                         ),
                       ),
                       Text(
-                        'Today ${DateFormat('h:mm a').format(notification.dateTime)}',
+                        'Today ${DateFormat('h:mm a').format(notification.date)}',
                         style: kCardTopTextStyle,
                       )
                     ],

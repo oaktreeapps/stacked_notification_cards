@@ -3,14 +3,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../model/notification_card.dart';
 import '../notification_tile/notification_tile.dart';
-import '../notification_tile/slid_button.dart';
+import '../notification_tile/slide_button.dart';
 
 typedef void OnTapSlidButtonCallback(int index);
 
-/// This widget is shown after animating AnimatedList.
+/// This widget is shown after animating [AnimatedOffsetList].
 /// show all cards in a column, has option to slide each card.
 class ExpandedList extends StatelessWidget {
-  final List<NotificationCard> notifications;
+  final List<NotificationCard> notificationCards;
   final AnimationController controller;
   final double initialSpacing;
   final double spacing;
@@ -19,10 +19,10 @@ class ExpandedList extends StatelessWidget {
   final double containerHeight;
   final Color tileColor;
   final double cornerRadius;
-  final String type;
+  final String notificationCardTitle;
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
   final Widget view;
   final Widget clear;
   final OnTapSlidButtonCallback onTapViewCallback;
@@ -30,7 +30,7 @@ class ExpandedList extends StatelessWidget {
 
   const ExpandedList({
     Key? key,
-    required this.notifications,
+    required this.notificationCards,
     required this.controller,
     required this.containerHeight,
     required this.initialSpacing,
@@ -38,10 +38,10 @@ class ExpandedList extends StatelessWidget {
     required this.cornerRadius,
     required this.tileColor,
     required this.tilePadding,
-    required this.type,
+    required this.notificationCardTitle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    required this.shadow,
+    required this.boxShadow,
     required this.clear,
     required this.view,
     required this.onTapClearCallback,
@@ -49,9 +49,9 @@ class ExpandedList extends StatelessWidget {
     required this.endPadding,
   }) : super(key: key);
 
-  /// determines whether to show the ExpandedList or not
-  /// when AnimatedOffsetList is shown this widget will not be shown.
-  /// when there is only one notification then ExpandedList will
+  /// determines whether to show the [ExpandedList] or not
+  /// when [AnimatedOffsetList] is shown this widget will not be shown.
+  /// when there is only one notification then [ExpandedList] will
   /// always be shown.
   bool _getListVisibility(int length) {
     if (length == 1) {
@@ -64,16 +64,16 @@ class ExpandedList extends StatelessWidget {
   }
 
   /// The padding that will be shown at the bottom of
-  /// all card, basically bottom padding of ExpandedList
+  /// all card, basically bottom padding of [ExpandedList]
   double _getEndPadding(int index) {
-    if (index == notifications.length - 1) {
+    if (index == notificationCards.length - 1) {
       return endPadding;
     } else {
       return 0;
     }
   }
 
-  /// Spacing of between two cards this value used
+  /// Spacing between two cards this value used
   /// to add padding under each SlidButton
   double _getSpacing(int index, double topSpace) {
     if (index == 0) {
@@ -102,8 +102,8 @@ class ExpandedList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reversedList = List.of(notifications);
-    reversedList.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+    final reversedList = List.of(notificationCards);
+    reversedList.sort((a, b) => b.date.compareTo(a.date));
     return Visibility(
       visible: _getListVisibility(reversedList.length),
       child: SlidableNotificationListener(
@@ -114,7 +114,7 @@ class ExpandedList extends StatelessWidget {
               (notification) {
                 final index = reversedList.indexOf(notification);
                 return BuildWithAnimation(
-                  key: ValueKey(notification.dateTime),
+                  key: ValueKey(notification.date),
                   // slidKey: ValueKey(notification.dateTime),
                   onTapView: onTapViewCallback,
                   view: view,
@@ -123,14 +123,14 @@ class ExpandedList extends StatelessWidget {
                   cornerRadius: cornerRadius,
                   onTapClear: onTapClearCallback,
                   spacing: _getSpacing(index, spacing),
-                  shadow: shadow,
+                  boxShadow: boxShadow,
                   index: index,
                   tileColor: tileColor,
                   endPadding: _getEndPadding(index),
                   tilePadding: tilePadding,
                   child: NotificationTile(
-                    heading: type,
-                    dateTime: notification.dateTime,
+                    cardTitle: notificationCardTitle,
+                    date: notification.date,
                     title: notification.title,
                     subtitle: notification.subtitle,
                     spacing: spacing,
@@ -139,7 +139,7 @@ class ExpandedList extends StatelessWidget {
                     cornerRadius: cornerRadius,
                     titleTextStyle: titleTextStyle,
                     subtitleTextStyle: subtitleTextStyle,
-                    shadow: shadow,
+                    boxShadow: boxShadow,
                     padding: EdgeInsets.fromLTRB(
                       tilePadding,
                       _topPadding(index),
@@ -167,7 +167,7 @@ class BuildWithAnimation extends StatefulWidget {
   final OnTapSlidButtonCallback onTapClear;
   final OnTapSlidButtonCallback onTapView;
   final int index;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
   final Color tileColor;
   final double endPadding;
   final double spacing;
@@ -183,7 +183,7 @@ class BuildWithAnimation extends StatefulWidget {
     required this.clear,
     required this.onTapClear,
     required this.index,
-    required this.shadow,
+    required this.boxShadow,
     required this.tileColor,
     required this.endPadding,
     required this.spacing,
@@ -229,7 +229,7 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
               dismissible: DismissiblePane(
                   onDismissed: () => widget.onTapClear(widget.index)),
               children: [
-                SlidButton(
+                SlideButton(
                   padding: EdgeInsets.fromLTRB(
                     0,
                     widget.spacing,
@@ -237,17 +237,17 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
                     widget.endPadding,
                   ),
                   color: widget.tileColor,
-                  shadow: widget.shadow,
+                  boxShadow: widget.boxShadow,
                   height: widget.containerHeight,
                   child: widget.view,
-                  onTapButton: (context) async {
+                  onTap: (context) async {
                     Slidable.of(context)?.close();
                     widget.onTapView(widget.index);
                   },
                   leftCornerRadius: widget.cornerRadius,
                   rightCornerRadius: widget.cornerRadius,
                 ),
-                SlidButton(
+                SlideButton(
                   padding: EdgeInsets.fromLTRB(
                     0,
                     widget.spacing,
@@ -255,10 +255,10 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
                     widget.endPadding,
                   ),
                   color: widget.tileColor,
-                  shadow: widget.shadow,
+                  boxShadow: widget.boxShadow,
                   height: widget.containerHeight,
                   child: widget.clear,
-                  onTapButton: (context) {
+                  onTap: (context) {
                     _animationController.forward().then(
                           (value) => widget.onTapClear(widget.index),
                         );

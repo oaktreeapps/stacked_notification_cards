@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import '../../stacked_notification_cards.dart';
 import '../notification_tile/notification_tile.dart';
 
-/// This  widget shows all cards are stacked (when collapsed) and animates (fans out)
-/// When tapped on the grouped (stacked) notifications.
-/// will replaced by ExpandedList.
+/// This  widget shows when all [NotificationCard]s are stacked (when collapsed) 
+/// and animates (fans out) When tapped on the grouped (stacked) [NotificationCard]s.
+/// will replaced by [ExpandedList].
 class AnimatedOffsetList extends StatelessWidget {
   final AnimationController controller;
   final Interval interval;
-  final List<NotificationCard> notifications;
+  final List<NotificationCard> notificationCards;
   final double height;
   final double spacing;
   final Color tileColor;
   final double cornerRadius;
-  final String type;
+  final String notificationCardTitle;
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
   final double padding;
 
   final Interval opacityInterval;
@@ -26,22 +26,22 @@ class AnimatedOffsetList extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.interval,
-    required this.notifications,
+    required this.notificationCards,
     required this.height,
     required this.spacing,
     required this.cornerRadius,
     required this.tileColor,
-    required this.type,
+    required this.notificationCardTitle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    required this.shadow,
+    required this.boxShadow,
     required this.opacityInterval,
     required this.padding,
   }) : super(key: key);
 
-  /// gives initial value depending on the number of notifications
+  /// gives initial value depending on the number of [NotificationCard]s
   double _getInitialValue(int index) {
-    final length = notifications.length;
+    final length = notificationCards.length;
 
     if (index == length - 1) {
       return 0.0;
@@ -56,7 +56,7 @@ class AnimatedOffsetList extends StatelessWidget {
   /// to offset each card when they expanded (while animating)
   /// offset value is zero for the first (top) card.
   double _finalOffsetValue(int index) {
-    final length = notifications.length;
+    final length = notificationCards.length;
     final double tileHeight = height + spacing;
 
     if (index == length - 1) {
@@ -69,7 +69,7 @@ class AnimatedOffsetList extends StatelessWidget {
   /// gives initial scale value to scale down initially
   /// first (top) card will not be scaled
   double _initialScaleValue(int index) {
-    final length = notifications.length;
+    final length = notificationCards.length;
     if (index == length - 1) {
       return 1.0;
     } else if (index == length - 2) {
@@ -82,7 +82,7 @@ class AnimatedOffsetList extends StatelessWidget {
   /// gives inital opacity all cards will be transparent
   /// expect first 3 cards. As they will shown as stacked.
   double _initialOpacityValue(int index) {
-    final length = notifications.length;
+    final length = notificationCards.length;
     if (index == length - 1) {
       return 1.0;
     } else if (index == length - 2) {
@@ -127,10 +127,10 @@ class AnimatedOffsetList extends StatelessWidget {
   }
 
   /// This required to replace the last card from this list
-  /// with the LastNotificationCard. There wise there will be two
+  /// with the [LastNotificationCard]. There wise there will be two
   /// cards shown at the top.
   bool _lastCardVisibility(int index) {
-    final length = notifications.length;
+    final length = notificationCards.length;
     if (index == length - 1 && controller.value <= 0.4) {
       return false;
     } else {
@@ -141,13 +141,13 @@ class AnimatedOffsetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: notifications.length > 1 && controller.value <= 0.8,
+      visible: notificationCards.length > 1 && controller.value <= 0.8,
       child: Stack(
         key: ValueKey('AnimatedOffsetList'),
         children: [
-          ...notifications.map(
+          ...notificationCards.map(
             (notification) {
-              final index = notifications.indexOf(notification);
+              final index = notificationCards.indexOf(notification);
               return Transform.translate(
                 offset: _tileOffset(index),
                 child: Transform.scale(
@@ -158,8 +158,8 @@ class AnimatedOffsetList extends StatelessWidget {
                     child: Visibility(
                       visible: _lastCardVisibility(index),
                       child: NotificationTile(
-                        heading: type,
-                        dateTime: notification.dateTime,
+                        cardTitle: notificationCardTitle,
+                        date: notification.date,
                         title: notification.title,
                         subtitle: notification.subtitle,
                         height: height,
@@ -167,7 +167,7 @@ class AnimatedOffsetList extends StatelessWidget {
                         cornerRadius: cornerRadius,
                         titleTextStyle: titleTextStyle,
                         subtitleTextStyle: subtitleTextStyle,
-                        shadow: shadow,
+                        boxShadow: boxShadow,
                         padding: EdgeInsets.symmetric(horizontal: padding),
                       ),
                     ),

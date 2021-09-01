@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 typedef void OnTapSlidButton(BuildContext context);
 
 /// This widget is shown when [NotificationCard]
-/// is slide. Used to view or clear the notification.
-class SlidButton extends StatelessWidget {
+/// is slide. Used to view or clear the [NotificationCard].
+class SlideButton extends StatelessWidget {
   final Color color;
   final double? leftCornerRadius;
   final double? rightCornerRadius;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
   final double height;
   final Widget child;
-  final OnTapSlidButton onTapButton;
+  final OnTapSlidButton onTap;
   final EdgeInsets padding;
-  const SlidButton({
+  const SlideButton({
     Key? key,
     required this.color,
     this.leftCornerRadius,
     this.rightCornerRadius,
-    required this.shadow,
+    required this.boxShadow,
     required this.height,
     required this.child,
-    required this.onTapButton,
+    required this.onTap,
     required this.padding,
   }) : super(key: key);
 
@@ -33,7 +33,7 @@ class SlidButton extends StatelessWidget {
       flex: 1,
       child: SizedBox.expand(
         child: GestureDetector(
-          onTap: () => onTapButton(context),
+          onTap: () => onTap(context),
           child: Container(
             margin: padding,
             height: height,

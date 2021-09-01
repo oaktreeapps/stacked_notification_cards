@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../model/notification_card.dart';
-import '../notification_tile/slid_button.dart';
+import '../notification_tile/slide_button.dart';
 import 'animated_offset_list.dart';
 import 'expanded_list.dart';
 import 'last_notification_card.dart';
@@ -13,17 +13,17 @@ import 'offset_spacer.dart';
 /// This widget is responsible for showing the stack of cards along with the fan animation on expansion. Also handles [OnTapSlidButtonCallback].
 class StackedCards extends StatelessWidget {
   final AnimationController controller;
-  final List<NotificationCard> notifications;
+  final List<NotificationCard> notificationCards;
   final double containerHeight;
   final double spacing;
   final double maxSpacing;
   final Color containerColor;
   final double cornerRadius;
   final double padding;
-  final String type;
+  final String notificationCardTitle;
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
   final VoidCallback onTapClearAll;
   final Widget view;
   final Widget clear;
@@ -34,17 +34,17 @@ class StackedCards extends StatelessWidget {
   StackedCards({
     Key? key,
     required this.controller,
-    required this.notifications,
+    required this.notificationCards,
     required this.containerHeight,
     required this.spacing,
     required this.maxSpacing,
     required this.containerColor,
     required this.cornerRadius,
     required this.padding,
-    required this.type,
+    required this.notificationCardTitle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    required this.shadow,
+    required this.boxShadow,
     required this.onTapClearAll,
     required this.clear,
     required this.view,
@@ -57,7 +57,7 @@ class StackedCards extends StatelessWidget {
   /// for 'Clear All' bottom when stacked cards are slide
 
   double _getSlidButtonPadding() {
-    final length = notifications.length;
+    final length = notificationCards.length;
     if (length == 1) {
       return padding;
     } else if (length == 2) {
@@ -69,8 +69,8 @@ class StackedCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// this notification will be shown in LastNotificationCard
-    final lastNotification = notifications.last;
+    /// this notification will be shown in [LastNotificationCard]
+    final lastNotification = notificationCards.last;
 
     /// wrapped in Slidable, this will help to slide when cards are stacked (groupped).
     return Slidable(
@@ -84,7 +84,7 @@ class StackedCards extends StatelessWidget {
           onDismissed: () => onTapClearAll,
         ),
         children: [
-          SlidButton(
+          SlideButton(
             padding: EdgeInsets.fromLTRB(
               0,
               0,
@@ -95,8 +95,8 @@ class StackedCards extends StatelessWidget {
             height: containerHeight,
             leftCornerRadius: cornerRadius,
             rightCornerRadius: cornerRadius,
-            shadow: shadow,
-            onTapButton: (context) async {
+            boxShadow: boxShadow,
+            onTap: (context) async {
               onTapClearAll();
             },
             child: clearAllStacked,
@@ -109,50 +109,50 @@ class StackedCards extends StatelessWidget {
             height: containerHeight,
             controller: controller,
             spacing: 2 * spacing,
-            notificationCount: notifications.length,
+            notificationCount: notificationCards.length,
             padding: padding,
           ),
           AnimatedOffsetList(
-            type: type,
+            notificationCardTitle: notificationCardTitle,
             padding: padding,
             controller: controller,
             interval: Interval(0.4, 0.8),
-            notifications: notifications,
+            notificationCards: notificationCards,
             height: containerHeight,
             spacing: maxSpacing,
             cornerRadius: cornerRadius,
             tileColor: containerColor,
             titleTextStyle: titleTextStyle,
             subtitleTextStyle: subtitleTextStyle,
-            shadow: shadow,
+            boxShadow: boxShadow,
             opacityInterval: Interval(0.4, 0.6),
           ),
           LastNotificationCard(
-            type: type,
+            notificationCardTitle: notificationCardTitle,
             controller: controller,
             notification: lastNotification,
-            totalCount: notifications.length,
+            totalCount: notificationCards.length,
             height: containerHeight,
             color: containerColor,
             cornerRadius: cornerRadius,
             titleTextStyle: titleTextStyle,
             subtitleTextStyle: subtitleTextStyle,
-            shadow: shadow,
+            boxShadow: boxShadow,
             padding: padding,
           ),
           ExpandedList(
-            type: type,
+            notificationCardTitle: notificationCardTitle,
             controller: controller,
             containerHeight: containerHeight,
             spacing: spacing,
             initialSpacing: 2 * spacing,
-            notifications: notifications,
+            notificationCards: notificationCards,
             tileColor: containerColor,
             cornerRadius: cornerRadius,
             tilePadding: padding,
             titleTextStyle: titleTextStyle,
             subtitleTextStyle: subtitleTextStyle,
-            shadow: shadow,
+            boxShadow: boxShadow,
             clear: clear,
             view: view,
             endPadding: padding,

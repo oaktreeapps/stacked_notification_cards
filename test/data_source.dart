@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 List<NotificationCard> dataList1 = [
   NotificationCard(
-  
-    dateTime: DateTime.now(),
+    date: DateTime.now(),
     leading: Icon(
       Icons.account_circle,
       size: 48,
@@ -16,8 +15,7 @@ List<NotificationCard> dataList1 = [
 
 List<NotificationCard> dataList2 = [
   NotificationCard(
-  
-    dateTime: DateTime.now(),
+    date: DateTime.now(),
     leading: Icon(
       Icons.account_circle,
       size: 48,
@@ -26,8 +24,7 @@ List<NotificationCard> dataList2 = [
     subtitle: 'We believe in the power of mobile computing.',
   ),
   NotificationCard(
- 
-    dateTime: DateTime.now().subtract(const Duration(minutes: 4)),
+    date: DateTime.now().subtract(const Duration(minutes: 4)),
     leading: Icon(
       Icons.account_circle,
       size: 48,
@@ -39,8 +36,7 @@ List<NotificationCard> dataList2 = [
 
 List<NotificationCard> dataList3 = [
   NotificationCard(
-  
-    dateTime: DateTime.now(),
+    date: DateTime.now(),
     leading: Icon(
       Icons.account_circle,
       size: 48,
@@ -49,8 +45,7 @@ List<NotificationCard> dataList3 = [
     subtitle: 'We believe in the power of mobile computing.',
   ),
   NotificationCard(
- 
-    dateTime: DateTime.now().subtract(const Duration(minutes: 4)),
+    date: DateTime.now().subtract(const Duration(minutes: 4)),
     leading: Icon(
       Icons.account_circle,
       size: 48,
@@ -59,8 +54,7 @@ List<NotificationCard> dataList3 = [
     subtitle: 'We believe in the power of mobile computing.',
   ),
   NotificationCard(
- 
-    dateTime: DateTime.now().subtract(const Duration(minutes: 10)),
+    date: DateTime.now().subtract(const Duration(minutes: 10)),
     leading: Icon(
       Icons.account_circle,
       size: 48,

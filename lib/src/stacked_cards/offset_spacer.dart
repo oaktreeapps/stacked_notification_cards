@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// This widget is stacked behind AnimatedOffsetList,
-///might seems useless but it gives
+/// This widget is stacked behind [AnimatedOffsetList],
+/// might seems useless but it gives
 /// height when cards are fans out, otherwise they
-/// would overlapped on the following widget.
+/// would overlap on the following widget.
 /// It pushes any following widget down in the list.
-/// It animates it's height when the AnimatedOffsetList animates.
+/// It animates it's height when the [AnimatedOffsetList] animates.
 /// Will disappear when Expanded List will be shown.
 class OffsetSpacer extends StatelessWidget {
   final AnimationController controller;
@@ -53,7 +53,6 @@ class OffsetSpacer extends StatelessWidget {
               ),
             )
             .value,
-        // color: Colors.amberAccent.withOpacity(0.2),
       ),
     );
   }

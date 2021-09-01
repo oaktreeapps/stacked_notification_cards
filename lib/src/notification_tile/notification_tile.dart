@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../constants.dart';
 
-/// This widget is the card actually and responsible for
-/// structuring the card.
+/// This widget is responsible for structuring the [NotificationCard].
 class NotificationTile extends StatelessWidget {
-  final String heading;
-  final DateTime dateTime;
+  final String cardTitle;
+  final DateTime date;
   final String title;
   final String subtitle;
   final EdgeInsets? padding;
@@ -16,20 +15,20 @@ class NotificationTile extends StatelessWidget {
   final Color color;
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
-  final List<BoxShadow>? shadow;
+  final List<BoxShadow>? boxShadow;
 
   const NotificationTile({
     Key? key,
     required this.title,
-    required this.heading,
-    required this.dateTime,
+    required this.cardTitle,
+    required this.date,
     required this.subtitle,
     required this.height,
     required this.cornerRadius,
     required this.color,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    required this.shadow,
+    required this.boxShadow,
     // required this.clear,
     // required this.view,
     this.spacing = 0,
@@ -44,11 +43,7 @@ class NotificationTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(cornerRadius),
-        boxShadow: shadow,
-        // border: Border.all(
-        //   color: Colors.black.withOpacity(0.2),
-        //   width: 1.4,
-        // ),
+        boxShadow: boxShadow,
       ),
       child: Column(
         children: [
@@ -59,13 +54,13 @@ class NotificationTile extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    heading,
+                    cardTitle,
                     style: kCardTopTextStyle,
                     maxLines: 1,
                   ),
                 ),
                 Text(
-                  'Today ${DateFormat('h:mm a').format(dateTime)}',
+                  'Today ${DateFormat('h:mm a').format(date)}',
                   style: kCardTopTextStyle,
                 )
               ],

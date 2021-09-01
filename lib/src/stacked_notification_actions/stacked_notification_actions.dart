@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 
 // This widget will be shown at the top. It has title.
 // and two buttons one is to 'showLess' another is to 'clear all'
-// when expanded
-class Header extends StatelessWidget {
+// these buttons are visible when expanded.
+class StackedNotificationActions extends StatelessWidget {
   final AnimationController controller;
   final double padding;
   final double spacing;
-  final Widget showLess;
+  final Widget showLessAction;
   final Widget title;
-  final Widget clearAll;
-  final VoidCallback onTapClearAll;
+  final Widget clearAllNotificationsAction;
+  final VoidCallback clearAll;
   final int notificationCount;
 
-  const Header({
+  const StackedNotificationActions({
     Key? key,
     required this.controller,
     required this.padding,
     required this.spacing,
     required this.title,
-    required this.showLess,
+    required this.showLessAction,
+    required this.clearAllNotificationsAction,
     required this.clearAll,
-    required this.onTapClearAll,
     required this.notificationCount,
   }) : super(key: key);
 
@@ -57,18 +57,18 @@ class Header extends StatelessWidget {
               visible: notificationCount > 1,
               child: Opacity(
                 opacity: opacity.value,
-                child: showLess,
+                child: showLessAction,
               ),
             ),
           ),
           // clear all button
           GestureDetector(
-            onTap: onTapClearAll,
+            onTap: clearAll,
             child: Visibility(
               visible: notificationCount > 1,
               child: Opacity(
                 opacity: opacity.value,
-                child: clearAll,
+                child: clearAllNotificationsAction,
               ),
             ),
           )

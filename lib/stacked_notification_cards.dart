@@ -10,107 +10,111 @@ export 'src/model/notification_card.dart';
 
 /// This package will let you
 class StackedNotificationCards extends StatelessWidget {
-  /// List of notifications to show.
-  final List<NotificationCard> notifications;
+  /// List of [NotificationCard]s to show.
+  final List<NotificationCard> notificationCards;
 
-  /// Color of each tile.
+  /// Color of each card.
   final Color cardColor;
 
-  /// Corner radius of tiles.
-  final double cornerRadius;
+  /// Corner radius of [NotificationCard].
+  final double cardCornerRadius;
 
-  /// Spacing between tiles when they are expanded.
+  /// Spacing between [NotificationCard]s  when they are expanded.
   final double cardsSpacing;
 
   /// Padding around the whole widget.
   final double padding;
 
-  /// Type of the each grouped cards.
-  final String type;
+  /// Title of all [NotificationCard]s, this will be same when they are in a list.
+  final String notificationCardTitle;
 
-  /// TextStyle of each notification card title.
+  /// [TextStyle] of each [NotificationCard]'s title.
   final TextStyle titleTextStyle;
 
-  /// TextStyle of each notification card subtitle.
+  /// TextStyle of each [NotificationCard]'s subtitle.
   final TextStyle? subtitleTextStyle;
 
-  /// Shadow behind every single card.
-  final List<BoxShadow>? shadow;
+  /// Shadow behind every [NotificationCard].
+  final List<BoxShadow>? boxShadow;
 
-  /// Callback when clear all button pressed.
+  /// Callback when clearAllStacked or clearAllNotificationsAction button pressed.
   final VoidCallback onTapClearAll;
 
   /// This widget is show the top-right after headerShowLess. Visible when the
   /// cards are expanded.
-  final Widget headerClearAllButton;
+  final Widget clearAllNotificationsAction;
 
   /// When notifications are stacked this widget is shown behind the card.
   /// visible when the card is slide
   final Widget clearAllStacked;
 
   /// This widget is shown at the top-left of all notifications
-  final Widget headerTitle;
+  final Widget actionTitle;
 
-  /// This widget is shown at the top-right of all notifications and has onTapClearAll callback.
-  final Widget headerShowLess;
+  /// This widget is shown at the top-right of all notifications and has on tap clearAll callback.
+  final Widget showLessAction;
 
-  /// View widget when card is slide
-  final Widget view;
+  /// This widget is stacked behind each [NotificationCard] visible when [NotificationCard] is slide.
+  /// Used to view details notification.
+  final Widget cardViewButton;
 
-  /// Clear widget when card is slide
-  final Widget clear;
+  /// This widget is stacked behind each [NotificationCard] visible when [NotificationCard] is slide.
+  /// Used to clear the notification.
+  final Widget cardClearButton;
 
-  /// Callback when tapped on view widget after sliding card.
+  /// Callback when tapped on cardViewButton widget after sliding card. This callback 
+  /// is used to show more details about the notification 
   final OnTapSlidButtonCallback onTapViewCallback;
 
-  /// Callback when tapped on clear widget after sliding card.
+  /// Callback when tapped on cardClearButton widget after sliding card. This callback
+  /// is used to clear the card. Also tigger a shirnk animation.
   final OnTapSlidButtonCallback onTapClearCallback;
 
   const StackedNotificationCards({
     Key? key,
-    required this.notifications,
+    required this.notificationCards,
     required this.cardColor,
-    required this.type,
+    required this.notificationCardTitle,
     required this.onTapClearAll,
-    required this.headerClearAllButton,
+    required this.clearAllNotificationsAction,
     required this.clearAllStacked,
-    required this.clear,
-    required this.view,
+    required this.cardClearButton,
+    required this.cardViewButton,
     required this.onTapClearCallback,
     required this.onTapViewCallback,
-    required this.headerTitle,
-    required this.headerShowLess,
-    this.shadow,
+    required this.actionTitle,
+    required this.showLessAction,
+    this.boxShadow,
     this.titleTextStyle = const TextStyle(fontWeight: FontWeight.w500),
     this.subtitleTextStyle,
-    this.cornerRadius = 8,
+    this.cardCornerRadius = 8,
     this.cardsSpacing = 10,
     this.padding = 0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (notifications.length > 0) {
+    if (notificationCards.length > 0) {
       return BuildStackedNotification(
         key: ValueKey('BuildStackedNotification'),
-        notifications: notifications,
+        notificationCards: notificationCards,
         tileColor: cardColor,
-        cornerRadius: cornerRadius,
+        cornerRadius: cardCornerRadius,
         spacing: cardsSpacing,
         padding: padding,
-        type: type,
+        notificationCardTitle: notificationCardTitle,
         titleTextStyle: titleTextStyle,
         subtitleTextStyle: subtitleTextStyle,
-        shadow: shadow,
+        boxShadow: boxShadow,
         onTapClearAll: onTapClearAll,
-        headerClearAllButton: headerClearAllButton,
+        clearAllNotificationsAction: clearAllNotificationsAction,
         clearAllStacked: clearAllStacked,
-        clear: clear,
-        view: view,
+        clear: cardClearButton,
+        view: cardViewButton,
         onTapViewCallback: onTapViewCallback,
         onTapClearCallback: onTapClearCallback,
-        headerTitle: headerTitle,
-        headerShowLess: headerShowLess,
+        headerTitle: actionTitle,
+        showLessAction: showLessAction,
       );
     } else {
       return SizedBox.shrink(
