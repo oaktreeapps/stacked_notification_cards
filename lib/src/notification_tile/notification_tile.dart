@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../constants.dart';
 
 /// This widget is responsible for structuring the [NotificationCard].
@@ -29,8 +30,6 @@ class NotificationTile extends StatelessWidget {
     required this.titleTextStyle,
     required this.subtitleTextStyle,
     required this.boxShadow,
-    // required this.clear,
-    // required this.view,
     this.spacing = 0,
     this.padding,
   }) : super(key: key);

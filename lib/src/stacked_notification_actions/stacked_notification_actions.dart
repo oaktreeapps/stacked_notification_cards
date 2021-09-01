@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-// This widget will be shown at the top. It has title.
-// and two buttons one is to 'showLess' another is to 'clear all'
-// these buttons are visible when expanded.
+/// This widget will be shown at the top of the stacked card. It has title.
+/// and two [Button]s. 'showLess' and 'clear all'
+/// The [Button]s are only visible when cards are expanded.
 class StackedNotificationActions extends StatelessWidget {
   final AnimationController controller;
   final double padding;

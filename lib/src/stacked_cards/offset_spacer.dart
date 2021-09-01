@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// This widget is stacked behind [AnimatedOffsetList],
-/// might seems useless but it gives
-/// height when cards are fans out, otherwise they
+/// and provides the height when cards are fans out, otherwise they
 /// would overlap on the following widget.
 /// It pushes any following widget down in the list.
 /// It animates it's height when the [AnimatedOffsetList] animates.
@@ -22,8 +21,8 @@ class OffsetSpacer extends StatelessWidget {
     required this.padding,
   }) : super(key: key);
 
-// This method gives initial height depending on
-// number of notification.
+  /// This method provides initial height depending on
+  /// number of notifications.
   double _getInitialHeight() {
     final length = notificationCount;
     if (length == 1) {

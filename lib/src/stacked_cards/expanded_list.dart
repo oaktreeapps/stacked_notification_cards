@@ -8,7 +8,7 @@ import '../notification_tile/slide_button.dart';
 typedef void OnTapSlidButtonCallback(int index);
 
 /// This widget is shown after animating [AnimatedOffsetList].
-/// show all cards in a column, has option to slide each card.
+/// Show all cards in a column, with the option to slide each card.
 class ExpandedList extends StatelessWidget {
   final List<NotificationCard> notificationCards;
   final AnimationController controller;
@@ -49,9 +49,9 @@ class ExpandedList extends StatelessWidget {
     required this.endPadding,
   }) : super(key: key);
 
-  /// determines whether to show the [ExpandedList] or not
-  /// when [AnimatedOffsetList] is shown this widget will not be shown.
-  /// when there is only one notification then [ExpandedList] will
+  /// Determines whether to show the [ExpandedList] or not
+  /// When [AnimatedOffsetList] is shown this widget will not be shown.
+  /// When there is only one notification then [ExpandedList] will
   /// always be shown.
   bool _getListVisibility(int length) {
     if (length == 1) {
@@ -83,14 +83,12 @@ class ExpandedList extends StatelessWidget {
     }
   }
 
-  /// top paddig of each cards initial padding will
+  /// Top padding of each cards initial padding will
   /// be same as AnimatedOffsetList inter card spacing
   /// then it will shrink (while animating). This will
-  /// give bounce animation when cards are expand.
+  /// give bounce animation when cards are expanding.
   double _topPadding(int index) {
-    return Tween<double>(
-            begin: _getSpacing(index, initialSpacing),
-            end: _getSpacing(index, spacing))
+    return Tween<double>(begin: _getSpacing(index, initialSpacing), end: _getSpacing(index, spacing))
         .animate(
           CurvedAnimation(
             parent: controller,
@@ -157,8 +155,8 @@ class ExpandedList extends StatelessWidget {
   }
 }
 
-/// This widget is used to animate each card when tapped
-/// on clear button.
+/// This widget is used to animate each card when clear action is selected
+
 class BuildWithAnimation extends StatefulWidget {
   final Widget child;
   final double cornerRadius;
@@ -190,15 +188,13 @@ class BuildWithAnimation extends StatefulWidget {
     required this.tilePadding,
     required this.onTapView,
     required this.view,
-    // required this.slidKey,
   }) : super(key: key);
 
   @override
   _BuildWithAnimationState createState() => _BuildWithAnimationState();
 }
 
-class _BuildWithAnimationState extends State<BuildWithAnimation>
-    with SingleTickerProviderStateMixin {
+class _BuildWithAnimationState extends State<BuildWithAnimation> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -216,18 +212,14 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
       key: ValueKey('BuildWithAnimation'),
       animation: _animationController,
       builder: (_, __) => Opacity(
-        opacity: Tween<double>(begin: 1.0, end: 0.0)
-            .animate(_animationController)
-            .value,
+        opacity: Tween<double>(begin: 1.0, end: 0.0).animate(_animationController).value,
         child: SizeTransition(
-          sizeFactor:
-              Tween<double>(begin: 1.0, end: 0.0).animate(_animationController),
+          sizeFactor: Tween<double>(begin: 1.0, end: 0.0).animate(_animationController),
           child: Slidable(
             key: UniqueKey(),
             endActionPane: ActionPane(
               motion: BehindMotion(),
-              dismissible: DismissiblePane(
-                  onDismissed: () => widget.onTapClear(widget.index)),
+              dismissible: DismissiblePane(onDismissed: () => widget.onTapClear(widget.index)),
               children: [
                 SlideButton(
                   padding: EdgeInsets.fromLTRB(

@@ -54,8 +54,7 @@ class StackedCards extends StatelessWidget {
   }) : super(key: key);
 
   /// This method gives the bottom padding that is used
-  /// for 'Clear All' bottom when stacked cards are slide
-
+  /// for 'Clear All' bottom when stacked cards are slid over
   double _getSlidButtonPadding() {
     final length = notificationCards.length;
     if (length == 1) {
@@ -72,7 +71,7 @@ class StackedCards extends StatelessWidget {
     /// this notification will be shown in [LastNotificationCard]
     final lastNotification = notificationCards.last;
 
-    /// wrapped in Slidable, this will help to slide when cards are stacked (groupped).
+    /// Wrapped in [Slidable], this will help to slide when cards are stacked.
     return Slidable(
       key: ValueKey('0'),
       endActionPane: ActionPane(
