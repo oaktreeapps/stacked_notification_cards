@@ -1,5 +1,5 @@
 name: stacked_notification_cards
-description: This package gives iOS style stacked notifications. And expand with a cool fan animation. It's also possible to slide each notification or when they are grouped.
+description: A Flutter implementation of iOS style stacked notifications which can be dismissed.
 repository: https://github.com/OakTree-Apps/stacked_notification_cards
 
 

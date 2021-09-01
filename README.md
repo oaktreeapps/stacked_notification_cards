@@ -2,30 +2,36 @@
 
 A Flutter implementation of iOS style stacked notifications. 
 
-### Features
-1. Given notifications can be stacked one upon the other (iOS style)
-2. Notifications can be expanded with fan animation.
-3. Individual notification card can slide either left or right
-4. Individual cards or the entire stack of cards can be dismissed via slide action.
-4. It's possible to use multiple `StackedNotificationCards` within a `Column`.
+## Features
+* Given notifications can be stacked one upon the other (iOS style)
+* Notifications can be expanded with fan animation.
+* Individual notification card can slide either left or right
+* Individual cards or the entire stack of cards can be dismissed via slide action.
+* It's possible to use multiple `StackedNotificationCards` within a `Column`.
 
 Make sure to wrap `StackedNotificationCards` in `SingleChildScrollView` if using within a  ``Column``.
 
-### Install
+## Install
 
 In the ``pubspec.yaml`` of your flutter project, add the following dependency:
 
+```yaml
+dependencies:
+  stacked_notification_cards: <latest_version>
+```
 
 Add then following import:
 
-``import 'package:stacked_notification_cards/stacked_notification_cards.dart';``
+```dart
+import 'package:stacked_notification_cards/stacked_notification_cards.dart';
+```
 
 
-### Getting Started
+## Getting Started
 
 Example:
 
-```
+```dart
             StackedNotificationCards(
               shadow: [
                 BoxShadow(
@@ -73,13 +79,19 @@ Example:
             ),
 
 ```
-### Demo
+## Demo
+<p align="center">
+<img src="https://raw.githubusercontent.com/OakTree-Apps/stacked_notification_cards/main/assets/demo_record.gif" width="300"/>
+</p>
 
-<img src="https://raw.githubusercontent.com/OakTree-Apps/stacked_notification_cards/main/assets/demo_record.gif"  width="300"/>
-
-### Contributions
+## Contributions
 
 Feel free to contribute to this project.
 
-- If you find a bug or want a feature, but don't know how to fix/implement it, please fill an issue.
-- If you fixed a bug or implemented a feature, please send a pull request.
+* If you find a bug or want have a new feature request, please file an [issue][issue].
+* If you fixed a bug or implemented a feature, please send a [pull request][pr].
+
+
+<!-- Links -->
+[issue]: https://github.com/OakTree-Apps/stacked_notification_cards/issues
+[pr]: https://github.com/OakTree-Apps/stacked_notification_cards/pulls
