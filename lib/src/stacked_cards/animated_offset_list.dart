@@ -97,7 +97,9 @@ class AnimatedOffsetList extends StatelessWidget {
   /// Gives Tween animation offset value to offset each card
   /// from initial to final.
   Offset _tileOffset(int index) {
-    return Tween(begin: Offset(0, _getInitialValue(index)), end: Offset(0, _finalOffsetValue(index)))
+    return Tween(
+            begin: Offset(0, _getInitialValue(index)),
+            end: Offset(0, _finalOffsetValue(index)))
         .animate(
           CurvedAnimation(parent: controller, curve: interval),
         )
@@ -166,7 +168,9 @@ class AnimatedOffsetList extends StatelessWidget {
                         titleTextStyle: titleTextStyle,
                         subtitleTextStyle: subtitleTextStyle,
                         boxShadow: boxShadow,
-                        padding: EdgeInsets.symmetric(horizontal: padding),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: padding,
+                        ),
                       ),
                     ),
                   ),

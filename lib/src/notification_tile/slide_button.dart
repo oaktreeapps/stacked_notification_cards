@@ -27,8 +27,12 @@ class SlideButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final leftRadius = leftCornerRadius != null ? Radius.circular(leftCornerRadius!) : Radius.zero;
-    final rightRadius = rightCornerRadius != null ? Radius.circular(rightCornerRadius!) : Radius.zero;
+    final leftRadius = leftCornerRadius != null
+        ? Radius.circular(leftCornerRadius!)
+        : Radius.zero;
+    final rightRadius = rightCornerRadius != null
+        ? Radius.circular(rightCornerRadius!)
+        : Radius.zero;
     return Expanded(
       flex: 1,
       child: SizedBox.expand(
