@@ -93,5 +93,5 @@ Feel free to contribute to this project.
 
 
 <!-- Links -->
-[issue]: https://github.com/OakTree-Apps/stacked_notification_cards/issues
-[pr]: https://github.com/OakTree-Apps/stacked_notification_cards/pulls
+[issue]: https://github.com/oakTreeapps/stacked_notification_cards/issues
+[pr]: https://github.com/oaktreeapps/stacked_notification_cards/pulls
