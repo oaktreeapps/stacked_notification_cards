@@ -73,7 +73,7 @@ class StackedCards extends StatelessWidget {
 
     /// Wrapped in [Slidable], this will help to slide when cards are stacked.
     return Slidable(
-      key: ValueKey('0'),
+      key: UniqueKey(),
       endActionPane: ActionPane(
         extentRatio: 0.25,
         openThreshold: 0.25,
