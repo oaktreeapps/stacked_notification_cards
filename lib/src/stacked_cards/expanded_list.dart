@@ -131,6 +131,7 @@ class ExpandedList extends StatelessWidget {
                     date: notification.date,
                     title: notification.title,
                     leading: notification.leading,
+                    format: notification.format,
                     subtitle: notification.subtitle,
                     spacing: spacing,
                     height: containerHeight,

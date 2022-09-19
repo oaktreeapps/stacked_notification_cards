@@ -6,6 +6,7 @@ import '../constants.dart';
 /// This widget is responsible for structuring the [NotificationCard].
 class NotificationTile extends StatelessWidget {
   final String cardTitle;
+  final String? format;
   final DateTime date;
   final String title;
   final Widget? leading;
@@ -34,6 +35,7 @@ class NotificationTile extends StatelessWidget {
     this.leading,
     this.spacing = 0,
     this.padding,
+    this.format
   }) : super(key: key);
 
   @override
@@ -61,7 +63,7 @@ class NotificationTile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Today ${DateFormat('h:mm a').format(date)}',
+                  '${DateFormat(format ?? 'h:mm a').format(date)}',
                   style: kCardTopTextStyle,
                 )
               ],
