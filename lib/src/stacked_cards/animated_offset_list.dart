@@ -161,6 +161,7 @@ class AnimatedOffsetList extends StatelessWidget {
                         cardTitle: notificationCardTitle,
                         date: notification.date,
                         title: notification.title,
+                        leading: notification.leading,
                         subtitle: notification.subtitle,
                         height: height,
                         color: tileColor,
