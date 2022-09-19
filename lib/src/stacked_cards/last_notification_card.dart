@@ -102,7 +102,7 @@ class LastNotificationCard extends StatelessWidget {
                 child: Visibility(
                   visible: controller.value <= 0.2,
                   child: ListTile(
-                    leading: Icon(
+                    leading: notification.leading ?? Icon(
                       Icons.account_circle,
                       size: 48,
                     ),
@@ -136,7 +136,7 @@ class LastNotificationCard extends StatelessWidget {
                 child: Visibility(
                   visible: controller.value >= 0.2,
                   child: ListTile(
-                    leading: Icon(
+                    leading: notification.leading ?? Icon(
                       Icons.account_circle,
                       size: 48,
                     ),
