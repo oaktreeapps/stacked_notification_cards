@@ -1,3 +1,6 @@
+## 0.1.0-dev.4
+ - upgrade flutter version and all plugins
+
 ## 0.1.0-dev.3
  - formatted to meet the static analysis score
 

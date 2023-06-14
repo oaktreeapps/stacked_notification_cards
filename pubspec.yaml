@@ -2,11 +2,10 @@ name: stacked_notification_cards
 description: A Flutter implementation of iOS style stacked notifications which can be dismissed.
 repository: https://github.com/OakTree-Apps/stacked_notification_cards
 
-
-version: 0.1.0-dev.3
+version: 0.1.0-dev.4
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=3.0.3 <4.0.0'
 
 dependencies:
   flutter:
