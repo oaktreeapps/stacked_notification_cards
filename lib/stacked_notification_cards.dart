@@ -96,7 +96,7 @@ class StackedNotificationCards extends StatelessWidget {
   Widget build(BuildContext context) {
     if (notificationCards.length > 0) {
       return BuildStackedNotification(
-        key: ValueKey('BuildStackedNotification'),
+        key: ValueKey(notificationCardTitle),
         notificationCards: notificationCards,
         tileColor: cardColor,
         cornerRadius: cardCornerRadius,
