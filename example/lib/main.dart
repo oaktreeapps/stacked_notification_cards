@@ -136,6 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTapViewCallback: (index) {
                 print(index);
               },
+              expandCollapseAnimationDuration: Duration(milliseconds: 500),
             ),
           ],
         ),

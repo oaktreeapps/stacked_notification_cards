@@ -24,9 +24,11 @@ class BuildStackedNotification extends StatefulWidget {
   final Widget showLessAction;
   final Widget clearAllNotificationsAction;
   final Widget clearAllStacked;
+  final Duration expandCollapseAnimationDuration;
 
   BuildStackedNotification({
     Key? key,
+    required this.expandCollapseAnimationDuration,
     required this.notificationCards,
     required this.tileColor,
     required this.cornerRadius,
@@ -63,7 +65,7 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: widget.expandCollapseAnimationDuration,
     );
   }
 

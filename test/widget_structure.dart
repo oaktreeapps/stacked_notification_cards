@@ -24,6 +24,7 @@ class BaseStructure extends StatelessWidget {
         actionTitle: Text(''),
         onTapClearCallback: (index) {},
         onTapViewCallback: (index) {},
+        expandCollapseAnimationDuration: Duration(milliseconds: 500),
       ),
     ));
   }
