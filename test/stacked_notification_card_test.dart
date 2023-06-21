@@ -59,7 +59,7 @@ void main() {
     ));
 
     final Finder buildStackedNotification = find.byKey(
-      ValueKey('BuildStackedNotification'),
+      ValueKey('Message'),
     );
 
     expect(buildStackedNotification, findsOneWidget);
@@ -83,33 +83,4 @@ void main() {
     expect(notificationTile, findsOneWidget);
   });
 
-  // testWidgets('Show notification tile when there is one notification',
-  //     (WidgetTester tester) async {
-  //   await tester.pumpWidget(
-  //     BaseStructure(
-  //       list: dataList1,
-  //     ),
-  //   );
-
-  //   final Finder notificationTile = find.byKey(
-  //     ValueKey('NotificationTile'),
-  //   );
-
-  //   expect(notificationTile, findsOneWidget);
-  // });
-
-  // testWidgets('Show CollapsedCards when there are more than one notification',
-  //     (WidgetTester tester) async {
-  //   await tester.pumpWidget(
-  //     BaseStructure(
-  //       list: dataList2,
-  //     ),
-  //   );
-
-  //   final Finder collapsedCards = find.byKey(
-  //     ValueKey('CollapsedCards'),
-  //   );
-
-  //   expect(collapsedCards, findsOneWidget);
-  // });
 }
