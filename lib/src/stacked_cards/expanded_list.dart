@@ -104,7 +104,7 @@ class ExpandedList extends StatelessWidget {
     reversedList.sort((a, b) => b.date.compareTo(a.date));
     return Visibility(
       visible: _getListVisibility(reversedList.length),
-      child: SlidableNotificationListener(
+      child: SlidableAutoCloseBehavior(
         child: Column(
           key: ValueKey('ExpandedList'),
           children: [
