@@ -104,7 +104,7 @@ class ExpandedList extends StatelessWidget {
     reversedList.sort((a, b) => b.date.compareTo(a.date));
     return Visibility(
       visible: _getListVisibility(reversedList.length),
-      child: SlidableNotificationListener(
+      child: SlidableAutoCloseBehavior(
         child: Column(
           key: ValueKey('ExpandedList'),
           children: [
@@ -113,7 +113,6 @@ class ExpandedList extends StatelessWidget {
                 final index = reversedList.indexOf(notification);
                 return BuildWithAnimation(
                   key: ValueKey(notification.date),
-                  // slidKey: ValueKey(notification.dateTime),
                   onTapView: onTapViewCallback,
                   view: view,
                   clear: clear,
