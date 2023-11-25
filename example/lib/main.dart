@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     NotificationCard(
       date: DateTime.now(),
       leading: Icon(
-        Icons.account_circle,
+        Icons.account_balance,
         size: 48,
       ),
       title: 'OakTree 1',
