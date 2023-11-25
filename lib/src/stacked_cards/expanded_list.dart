@@ -147,7 +147,6 @@ class ExpandedList extends StatelessWidget {
                       tilePadding,
                       _getEndPadding(index),
                     ),
-                    leading: notification.leading,
                   ),
                 );
               },
