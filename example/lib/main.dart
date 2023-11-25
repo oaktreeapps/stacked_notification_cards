@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 4),
       ),
       leading: Icon(
-        Icons.account_circle,
+        Icons.account_box_outlined,
         size: 48,
       ),
       title: 'OakTree 2',
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 10),
       ),
       leading: Icon(
-        Icons.account_circle,
+        Icons.access_time_filled_sharp,
         size: 48,
       ),
       title: 'OakTree 3',
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 30),
       ),
       leading: Icon(
-        Icons.account_circle,
+        Icons.access_alarm_rounded,
         size: 48,
       ),
       title: 'OakTree 4',
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 44),
       ),
       leading: Icon(
-        Icons.account_circle,
+        Icons.ac_unit,
         size: 48,
       ),
       title: 'OakTree 5',
