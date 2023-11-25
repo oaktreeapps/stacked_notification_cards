@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     NotificationCard(
       date: DateTime.now(),
       leading: Icon(
-        Icons.account_balance,
+        Icons.account_circle,
         size: 48,
       ),
       title: 'OakTree 1',
@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 4),
       ),
       leading: Icon(
-        Icons.account_box_outlined,
+        Icons.account_circle,
         size: 48,
       ),
       title: 'OakTree 2',
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 10),
       ),
       leading: Icon(
-        Icons.access_time_filled_sharp,
+        Icons.account_circle,
         size: 48,
       ),
       title: 'OakTree 3',
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 30),
       ),
       leading: Icon(
-        Icons.access_alarm_rounded,
+        Icons.account_circle,
         size: 48,
       ),
       title: 'OakTree 4',
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         const Duration(minutes: 44),
       ),
       leading: Icon(
-        Icons.ac_unit,
+        Icons.account_circle,
         size: 48,
       ),
       title: 'OakTree 5',
