@@ -88,7 +88,9 @@ class ExpandedList extends StatelessWidget {
   /// then it will shrink (while animating). This will
   /// give bounce animation when cards are expanding.
   double _topPadding(int index) {
-    return Tween<double>(begin: _getSpacing(index, initialSpacing), end: _getSpacing(index, spacing))
+    return Tween<double>(
+            begin: _getSpacing(index, initialSpacing),
+            end: _getSpacing(index, spacing))
         .animate(
           CurvedAnimation(
             parent: controller,
@@ -145,6 +147,7 @@ class ExpandedList extends StatelessWidget {
                       tilePadding,
                       _getEndPadding(index),
                     ),
+                    leading: notification.leading,
                   ),
                 );
               },
@@ -172,6 +175,7 @@ class BuildWithAnimation extends StatefulWidget {
   final double spacing;
   final double tilePadding;
   final Widget view;
+
   // final Key slidKey;
 
   const BuildWithAnimation({
@@ -195,7 +199,8 @@ class BuildWithAnimation extends StatefulWidget {
   _BuildWithAnimationState createState() => _BuildWithAnimationState();
 }
 
-class _BuildWithAnimationState extends State<BuildWithAnimation> with SingleTickerProviderStateMixin {
+class _BuildWithAnimationState extends State<BuildWithAnimation>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -213,14 +218,18 @@ class _BuildWithAnimationState extends State<BuildWithAnimation> with SingleTick
       key: ValueKey('BuildWithAnimation'),
       animation: _animationController,
       builder: (_, __) => Opacity(
-        opacity: Tween<double>(begin: 1.0, end: 0.0).animate(_animationController).value,
+        opacity: Tween<double>(begin: 1.0, end: 0.0)
+            .animate(_animationController)
+            .value,
         child: SizeTransition(
-          sizeFactor: Tween<double>(begin: 1.0, end: 0.0).animate(_animationController),
+          sizeFactor:
+              Tween<double>(begin: 1.0, end: 0.0).animate(_animationController),
           child: Slidable(
             key: UniqueKey(),
             endActionPane: ActionPane(
               motion: BehindMotion(),
-              dismissible: DismissiblePane(onDismissed: () => widget.onTapClear(widget.index)),
+              dismissible: DismissiblePane(
+                  onDismissed: () => widget.onTapClear(widget.index)),
               children: [
                 SlideButton(
                   padding: EdgeInsets.fromLTRB(
