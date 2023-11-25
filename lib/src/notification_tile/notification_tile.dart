@@ -17,6 +17,7 @@ class NotificationTile extends StatelessWidget {
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? boxShadow;
+  final Widget? leading;
 
   const NotificationTile({
     Key? key,
@@ -30,6 +31,7 @@ class NotificationTile extends StatelessWidget {
     required this.titleTextStyle,
     required this.subtitleTextStyle,
     required this.boxShadow,
+    required this.leading,
     this.spacing = 0,
     this.padding,
   }) : super(key: key);
@@ -69,10 +71,7 @@ class NotificationTile extends StatelessWidget {
             height: 17,
           ),
           ListTile(
-            leading: Icon(
-              Icons.account_circle,
-              size: 48,
-            ),
+            leading: leading,
             title: Text(
               title,
               maxLines: 1,
