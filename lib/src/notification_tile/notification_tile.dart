@@ -17,7 +17,7 @@ class NotificationTile extends StatelessWidget {
   final TextStyle titleTextStyle;
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? boxShadow;
-  final Widget leading;
+  final Widget? leading;
 
   const NotificationTile({
     Key? key,
