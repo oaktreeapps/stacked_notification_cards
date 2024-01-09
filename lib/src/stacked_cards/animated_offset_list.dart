@@ -19,8 +19,8 @@ class AnimatedOffsetList extends StatelessWidget {
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? boxShadow;
   final double padding;
-
   final Interval opacityInterval;
+  final String dateText;
 
   const AnimatedOffsetList({
     Key? key,
@@ -37,6 +37,7 @@ class AnimatedOffsetList extends StatelessWidget {
     required this.boxShadow,
     required this.opacityInterval,
     required this.padding,
+    required this.dateText,
   }) : super(key: key);
 
   /// Gives initial value depending on the number of [NotificationCard]s
@@ -172,6 +173,8 @@ class AnimatedOffsetList extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: padding,
                         ),
+                        dateText: dateText,
+                        controller: controller,
                       ),
                     ),
                   ),

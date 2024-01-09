@@ -24,6 +24,9 @@ class BuildStackedNotification extends StatefulWidget {
   final Widget showLessAction;
   final Widget clearAllNotificationsAction;
   final Widget clearAllStacked;
+  final String lastNotificationText;
+  final bool notificationCounter;
+  final String dateText;
 
   BuildStackedNotification({
     Key? key,
@@ -45,6 +48,9 @@ class BuildStackedNotification extends StatefulWidget {
     required this.clearAllNotificationsAction,
     required this.clearAllStacked,
     required this.showLessAction,
+    required this.lastNotificationText,
+    required this.notificationCounter,
+    required this.dateText,
   }) : super(key: key);
 
   @override
@@ -87,6 +93,9 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
     final showLessAction = widget.showLessAction;
     final clearAllNotificationsAction = widget.clearAllNotificationsAction;
     final clearAllStacked = widget.clearAllStacked;
+    final lastNotificationText = widget.lastNotificationText;
+    final notificationCounter = widget.notificationCounter;
+    final dateText = widget.dateText;
 
     /// needs to sort to show the list in ascending date order
     notificationCards.sort((a, b) => a.date.compareTo(b.date));
@@ -127,6 +136,9 @@ class _BuildStackedNotificationState extends State<BuildStackedNotification>
             subtitleTextStyle: subtitleStyle,
             boxShadow: boxShadow,
             onTapClearAll: onTapClearAll,
+            lastNotificationText: lastNotificationText,
+            notificationCounter: notificationCounter,
+            dateText: dateText,
           ),
         ],
       ),

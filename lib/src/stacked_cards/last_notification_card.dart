@@ -19,6 +19,9 @@ class LastNotificationCard extends StatelessWidget {
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? boxShadow;
   final double padding;
+  final String lastNotificationText;
+  final bool notificationCounter;
+  final String dateText;
 
   const LastNotificationCard({
     Key? key,
@@ -33,6 +36,9 @@ class LastNotificationCard extends StatelessWidget {
     required this.titleTextStyle,
     required this.boxShadow,
     required this.padding,
+    required this.lastNotificationText,
+    required this.notificationCounter,
+    required this.dateText,
   }) : super(key: key);
 
   @override
@@ -80,7 +86,8 @@ class LastNotificationCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Today ${DateFormat('h:mm a').format(notification.date)}',
+                        dateText +
+                            ' ${DateFormat('h:mm a').format(notification.date)}',
                         style: kCardTopTextStyle,
                       )
                     ],
@@ -161,15 +168,19 @@ class LastNotificationCard extends StatelessWidget {
                       )
                       .value,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 4.0,
-                    ),
-                    child: Text(
-                      '${totalCount - 1} more notification',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 4.0,
+                      ),
+                      child: notificationCounter
+                          ? Text(
+                              '${totalCount - 1} ' + lastNotificationText,
+                              style: TextStyle(fontSize: 16),
+                            )
+                          : Text(
+                              lastNotificationText,
+                              style: TextStyle(fontSize: 16),
+                            )),
                 ),
               ),
             ],

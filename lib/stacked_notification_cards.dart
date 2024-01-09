@@ -52,7 +52,7 @@ class StackedNotificationCards extends StatelessWidget {
   final Widget actionTitle;
 
   /// This widget is shown at the top-right of all notifications and has on tap clearAll callback.
-  final Widget showLessAction;
+  final Widget? showLessAction;
 
   /// This widget is stacked behind each [NotificationCard] visible when [NotificationCard] is slide.
   /// Used to view details notification.
@@ -62,13 +62,22 @@ class StackedNotificationCards extends StatelessWidget {
   /// Used to clear the notification.
   final Widget cardClearButton;
 
-  /// Callback when tapped on cardViewButton widget after sliding card. This callback 
-  /// is used to show more details about the notification 
+  /// Callback when tapped on cardViewButton widget after sliding card. This callback
+  /// is used to show more details about the notification
   final OnTapSlidButtonCallback onTapViewCallback;
 
   /// Callback when tapped on cardClearButton widget after sliding card. This callback
   /// is used to clear the card. Also tigger a shirnk animation.
   final OnTapSlidButtonCallback onTapClearCallback;
+// Assign a list of random colors to the card
+
+  //Notification counter text
+  final String? lastNotificationText;
+  //Notification counter visibility
+  final bool? notificationCounter;
+  //Date text
+  final String? dateText;
+  //List ramdon colors
 
   const StackedNotificationCards({
     Key? key,
@@ -83,13 +92,16 @@ class StackedNotificationCards extends StatelessWidget {
     required this.onTapClearCallback,
     required this.onTapViewCallback,
     required this.actionTitle,
-    required this.showLessAction,
+    this.showLessAction = const SizedBox.shrink(),
+    this.lastNotificationText = "more notifications",
+    this.notificationCounter = true,
     this.boxShadow,
     this.titleTextStyle = const TextStyle(fontWeight: FontWeight.w500),
     this.subtitleTextStyle,
     this.cardCornerRadius = 8,
     this.cardsSpacing = 10,
     this.padding = 0,
+    this.dateText = "Today",
   }) : super(key: key);
 
   @override
@@ -114,7 +126,10 @@ class StackedNotificationCards extends StatelessWidget {
         onTapViewCallback: onTapViewCallback,
         onTapClearCallback: onTapClearCallback,
         headerTitle: actionTitle,
-        showLessAction: showLessAction,
+        showLessAction: showLessAction!,
+        dateText: dateText!,
+        notificationCounter: notificationCounter!,
+        lastNotificationText: lastNotificationText!,
       );
     } else {
       return SizedBox.shrink(

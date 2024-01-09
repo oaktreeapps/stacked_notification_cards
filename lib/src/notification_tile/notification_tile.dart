@@ -18,6 +18,8 @@ class NotificationTile extends StatelessWidget {
   final TextStyle? subtitleTextStyle;
   final List<BoxShadow>? boxShadow;
   final Widget? leading;
+  final String dateText;
+  final AnimationController controller;
 
   const NotificationTile({
     Key? key,
@@ -34,58 +36,63 @@ class NotificationTile extends StatelessWidget {
     required this.leading,
     this.spacing = 0,
     this.padding,
+    required this.dateText,
+    required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: padding,
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(cornerRadius),
-        boxShadow: boxShadow,
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    cardTitle,
-                    style: kCardTopTextStyle,
-                    maxLines: 1,
+    return GestureDetector(
+      onTap: () => controller.reverse(),
+      child: Container(
+        margin: padding,
+        height: height,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(cornerRadius),
+          boxShadow: boxShadow,
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      cardTitle,
+                      style: kCardTopTextStyle,
+                      maxLines: 1,
+                    ),
                   ),
-                ),
-                Text(
-                  'Today ${DateFormat('h:mm a').format(date)}',
-                  style: kCardTopTextStyle,
-                )
-              ],
+                  Text(
+                    dateText + ' ${DateFormat('h:mm a').format(date)}',
+                    style: kCardTopTextStyle,
+                  )
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 17,
-          ),
-          ListTile(
-            leading: leading,
-            title: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: titleTextStyle,
+            SizedBox(
+              height: 17,
             ),
-            subtitle: Text(
-              subtitle,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: subtitleTextStyle,
+            ListTile(
+              leading: leading,
+              title: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: titleTextStyle,
+              ),
+              subtitle: Text(
+                subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: subtitleTextStyle,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

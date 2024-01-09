@@ -15,9 +15,9 @@ class SlideButton extends StatelessWidget {
   final EdgeInsets padding;
   const SlideButton({
     Key? key,
-    required this.color,
     this.leftCornerRadius,
     this.rightCornerRadius,
+    required this.color,
     required this.boxShadow,
     required this.height,
     required this.child,

@@ -93,6 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             StackedNotificationCards(
+              dateText: "Hoy a las",
+              // lastNotificationText: "Tareas Pendientes",
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.25),
@@ -110,20 +112,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              showLessAction: Text(
-                'Show less',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
-                ),
-              ),
+
+              // showLessAction: Text(
+              //   'Show less',
+              //   style: TextStyle(
+              //     fontSize: 18,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.deepPurple,
+              //   ),
+              // ),
+
               onTapClearAll: () {
                 setState(() {
                   _listOfNotification.clear();
                 });
               },
-              clearAllNotificationsAction: Icon(Icons.close),
+              clearAllNotificationsAction: SizedBox.shrink(),
               clearAllStacked: Text('Clear All'),
               cardClearButton: Text('clear'),
               cardViewButton: Text('view'),

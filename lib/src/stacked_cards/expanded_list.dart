@@ -27,6 +27,7 @@ class ExpandedList extends StatelessWidget {
   final Widget clear;
   final OnTapSlidButtonCallback onTapViewCallback;
   final OnTapSlidButtonCallback onTapClearCallback;
+  final String dateText;
 
   const ExpandedList({
     Key? key,
@@ -47,6 +48,7 @@ class ExpandedList extends StatelessWidget {
     required this.onTapClearCallback,
     required this.onTapViewCallback,
     required this.endPadding,
+    required this.dateText,
   }) : super(key: key);
 
   /// Determines whether to show the [ExpandedList] or not
@@ -147,6 +149,8 @@ class ExpandedList extends StatelessWidget {
                       tilePadding,
                       _getEndPadding(index),
                     ),
+                    dateText: dateText,
+                    controller: controller,
                   ),
                 );
               },
