@@ -68,14 +68,11 @@ Example:
               clear: Text('clear'),
               view: Text('view'),
               onTapClearCallback: (index) {
-                print(index);
                 setState(() {
                   _listOfNotification.removeAt(index);
                 });
               },
-              onTapViewCallback: (index) {
-                print(index);
-              },
+              onTapViewCallback: (index) {},
             ),
 
 ```

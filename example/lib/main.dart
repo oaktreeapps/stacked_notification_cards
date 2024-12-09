@@ -24,6 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ///initialize notification array
   List<NotificationCard> _listOfNotification = [
     NotificationCard(
       date: DateTime.now(),
@@ -128,14 +129,11 @@ class _MyHomePageState extends State<MyHomePage> {
               cardClearButton: Text('clear'),
               cardViewButton: Text('view'),
               onTapClearCallback: (index) {
-                print(index);
                 setState(() {
                   _listOfNotification.removeAt(index);
                 });
               },
-              onTapViewCallback: (index) {
-                print(index);
-              },
+              onTapViewCallback: (index) {},
             ),
           ],
         ),
