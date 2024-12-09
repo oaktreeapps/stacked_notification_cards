@@ -129,11 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
               cardClearButton: Text('clear'),
               cardViewButton: Text('view'),
               onTapClearCallback: (index) {
+                print(index);
                 setState(() {
                   _listOfNotification.removeAt(index);
                 });
               },
-              onTapViewCallback: (index) {},
+              onTapViewCallback: (index) {
+                print(index);
+              },
             ),
           ],
         ),
