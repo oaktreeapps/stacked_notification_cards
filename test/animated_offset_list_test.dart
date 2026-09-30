@@ -16,7 +16,7 @@ void main() {
     expect(animatedOffsetList, findsOneWidget);
 
     await tester.tap(find.byKey(
-     ValueKey('onTapExpand'),
+      ValueKey('onTapExpand'),
     ));
     await tester.pumpAndSettle();
     expect(animatedOffsetList, findsNothing);

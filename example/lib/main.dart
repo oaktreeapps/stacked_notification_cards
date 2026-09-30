@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,13 +21,15 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   ///initialize notification array
-  List<NotificationCard> _listOfNotification = [
+  final List<NotificationCard> _listOfNotification = [
     NotificationCard(
       date: DateTime.now(),
       leading: Icon(
@@ -96,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             StackedNotificationCards(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
+                  color: Colors.black.withValues(alpha: 0.25),
                   blurRadius: 2.0,
                 )
               ],
@@ -129,13 +133,13 @@ class _MyHomePageState extends State<MyHomePage> {
               cardClearButton: Text('clear'),
               cardViewButton: Text('view'),
               onTapClearCallback: (index) {
-                print(index);
+                debugPrint('$index');
                 setState(() {
                   _listOfNotification.removeAt(index);
                 });
               },
               onTapViewCallback: (index) {
-                print(index);
+                debugPrint('$index');
               },
             ),
           ],

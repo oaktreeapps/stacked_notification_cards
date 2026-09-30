@@ -1,4 +1,4 @@
-library stacked_notification_cards;
+library;
 
 import 'package:flutter/material.dart';
 
@@ -62,8 +62,8 @@ class StackedNotificationCards extends StatelessWidget {
   /// Used to clear the notification.
   final Widget cardClearButton;
 
-  /// Callback when tapped on cardViewButton widget after sliding card. This callback 
-  /// is used to show more details about the notification 
+  /// Callback when tapped on cardViewButton widget after sliding card. This callback
+  /// is used to show more details about the notification
   final OnTapSlidButtonCallback onTapViewCallback;
 
   /// Callback when tapped on cardClearButton widget after sliding card. This callback
@@ -71,7 +71,7 @@ class StackedNotificationCards extends StatelessWidget {
   final OnTapSlidButtonCallback onTapClearCallback;
 
   const StackedNotificationCards({
-    Key? key,
+    super.key,
     required this.notificationCards,
     required this.cardColor,
     required this.notificationCardTitle,
@@ -90,11 +90,11 @@ class StackedNotificationCards extends StatelessWidget {
     this.cardCornerRadius = 8,
     this.cardsSpacing = 10,
     this.padding = 0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (notificationCards.length > 0) {
+    if (notificationCards.isNotEmpty) {
       return BuildStackedNotification(
         key: ValueKey(notificationCardTitle),
         notificationCards: notificationCards,

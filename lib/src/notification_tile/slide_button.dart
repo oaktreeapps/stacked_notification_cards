@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef void OnTapSlideButton(BuildContext context);
+typedef OnTapSlideButton = void Function(BuildContext context);
 
 /// This widget is shown when [NotificationCard]
 /// is slid. Used to view or clear the [NotificationCard].
@@ -14,7 +14,7 @@ class SlideButton extends StatelessWidget {
   final OnTapSlideButton onTap;
   final EdgeInsets padding;
   const SlideButton({
-    Key? key,
+    super.key,
     required this.color,
     this.leftCornerRadius,
     this.rightCornerRadius,
@@ -23,7 +23,7 @@ class SlideButton extends StatelessWidget {
     required this.child,
     required this.onTap,
     required this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,6 @@ class SlideButton extends StatelessWidget {
             margin: padding,
             height: height,
             alignment: Alignment.center,
-            child: child,
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.horizontal(
@@ -50,6 +49,7 @@ class SlideButton extends StatelessWidget {
                 right: rightRadius,
               ),
             ),
+            child: child,
           ),
         ),
       ),

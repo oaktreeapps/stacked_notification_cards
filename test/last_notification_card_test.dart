@@ -31,7 +31,7 @@ void main() {
     final Finder lastNotificationCard = find.byKey(
       ValueKey('LastNotificationCard'),
     );
-  
+
     expect(lastNotificationCard, findsNothing);
   });
 }

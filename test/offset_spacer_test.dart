@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'data_source.dart';
 import 'widget_structure.dart';
 
-
 void main() {
   testWidgets('Show when cards are collapsed and animate.',
       (WidgetTester tester) async {
