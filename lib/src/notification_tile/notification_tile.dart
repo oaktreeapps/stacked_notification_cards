@@ -20,7 +20,7 @@ class NotificationTile extends StatelessWidget {
   final Widget? leading;
 
   const NotificationTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.cardTitle,
     required this.date,
@@ -34,7 +34,7 @@ class NotificationTile extends StatelessWidget {
     required this.leading,
     this.spacing = 0,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

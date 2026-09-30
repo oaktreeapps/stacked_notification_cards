@@ -5,7 +5,7 @@ import '../model/notification_card.dart';
 import '../notification_tile/notification_tile.dart';
 import '../notification_tile/slide_button.dart';
 
-typedef void OnTapSlidButtonCallback(int index);
+typedef OnTapSlidButtonCallback = void Function(int index);
 
 /// This widget is shown after animating [AnimatedOffsetList].
 /// Show all cards in a column, with the option to slide each card.
@@ -29,7 +29,7 @@ class ExpandedList extends StatelessWidget {
   final OnTapSlidButtonCallback onTapClearCallback;
 
   const ExpandedList({
-    Key? key,
+    super.key,
     required this.notificationCards,
     required this.controller,
     required this.containerHeight,
@@ -47,7 +47,7 @@ class ExpandedList extends StatelessWidget {
     required this.onTapClearCallback,
     required this.onTapViewCallback,
     required this.endPadding,
-  }) : super(key: key);
+  });
 
   /// Determines whether to show the [ExpandedList] or not
   /// When [AnimatedOffsetList] is shown this widget will not be shown.
@@ -178,7 +178,7 @@ class BuildWithAnimation extends StatefulWidget {
   // final Key slidKey;
 
   const BuildWithAnimation({
-    Key? key,
+    super.key,
     required this.child,
     required this.cornerRadius,
     required this.containerHeight,
@@ -192,10 +192,10 @@ class BuildWithAnimation extends StatefulWidget {
     required this.tilePadding,
     required this.onTapView,
     required this.view,
-  }) : super(key: key);
+  });
 
   @override
-  _BuildWithAnimationState createState() => _BuildWithAnimationState();
+  State<BuildWithAnimation> createState() => _BuildWithAnimationState();
 }
 
 class _BuildWithAnimationState extends State<BuildWithAnimation>
@@ -240,13 +240,13 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
                   color: widget.tileColor,
                   boxShadow: widget.boxShadow,
                   height: widget.containerHeight,
-                  child: widget.view,
                   onTap: (context) async {
                     Slidable.of(context)?.close();
                     widget.onTapView(widget.index);
                   },
                   leftCornerRadius: widget.cornerRadius,
                   rightCornerRadius: widget.cornerRadius,
+                  child: widget.view,
                 ),
                 SlideButton(
                   padding: EdgeInsets.fromLTRB(
@@ -258,7 +258,6 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
                   color: widget.tileColor,
                   boxShadow: widget.boxShadow,
                   height: widget.containerHeight,
-                  child: widget.clear,
                   onTap: (context) {
                     _animationController.forward().then(
                           (value) => widget.onTapClear(widget.index),
@@ -266,6 +265,7 @@ class _BuildWithAnimationState extends State<BuildWithAnimation>
                   },
                   rightCornerRadius: widget.cornerRadius,
                   leftCornerRadius: widget.cornerRadius,
+                  child: widget.clear,
                 ),
               ],
             ),

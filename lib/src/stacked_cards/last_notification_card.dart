@@ -21,7 +21,7 @@ class LastNotificationCard extends StatelessWidget {
   final double padding;
 
   const LastNotificationCard({
-    Key? key,
+    super.key,
     required this.controller,
     required this.notification,
     required this.totalCount,
@@ -33,7 +33,7 @@ class LastNotificationCard extends StatelessWidget {
     required this.titleTextStyle,
     required this.boxShadow,
     required this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
