@@ -25,8 +25,8 @@ class BuildStackedNotification extends StatefulWidget {
   final Widget clearAllNotificationsAction;
   final Widget clearAllStacked;
 
-  BuildStackedNotification({
-    Key? key,
+  const BuildStackedNotification({
+    super.key,
     required this.notificationCards,
     required this.tileColor,
     required this.cornerRadius,
@@ -45,10 +45,10 @@ class BuildStackedNotification extends StatefulWidget {
     required this.clearAllNotificationsAction,
     required this.clearAllStacked,
     required this.showLessAction,
-  }) : super(key: key);
+  });
 
   @override
-  _BuildStackedNotificationState createState() =>
+  State<BuildStackedNotification> createState() =>
       _BuildStackedNotificationState();
 }
 

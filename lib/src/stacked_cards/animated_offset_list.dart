@@ -23,7 +23,7 @@ class AnimatedOffsetList extends StatelessWidget {
   final Interval opacityInterval;
 
   const AnimatedOffsetList({
-    Key? key,
+    super.key,
     required this.controller,
     required this.interval,
     required this.notificationCards,
@@ -37,7 +37,7 @@ class AnimatedOffsetList extends StatelessWidget {
     required this.boxShadow,
     required this.opacityInterval,
     required this.padding,
-  }) : super(key: key);
+  });
 
   /// Gives initial value depending on the number of [NotificationCard]s
   double _getInitialValue(int index) {

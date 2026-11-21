@@ -13,13 +13,13 @@ class OffsetSpacer extends StatelessWidget {
   final double spacing;
   final double padding;
   const OffsetSpacer({
-    Key? key,
+    super.key,
     required this.controller,
     required this.notificationCount,
     required this.height,
     required this.spacing,
     required this.padding,
-  }) : super(key: key);
+  });
 
   /// This method provides initial height depending on
   /// number of notifications.

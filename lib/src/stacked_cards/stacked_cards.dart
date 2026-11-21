@@ -31,8 +31,8 @@ class StackedCards extends StatelessWidget {
   final OnTapSlidButtonCallback onTapClearCallback;
   final Widget clearAllStacked;
 
-  StackedCards({
-    Key? key,
+  const StackedCards({
+    super.key,
     required this.controller,
     required this.notificationCards,
     required this.containerHeight,
@@ -51,7 +51,7 @@ class StackedCards extends StatelessWidget {
     required this.onTapClearCallback,
     required this.onTapViewCallback,
     required this.clearAllStacked,
-  }) : super(key: key);
+  });
 
   /// This method gives the bottom padding that is used
   /// for 'Clear All' bottom when stacked cards are slid over

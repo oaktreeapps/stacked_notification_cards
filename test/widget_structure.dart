@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../lib/stacked_notification_cards.dart';
+import 'package:stacked_notification_cards/stacked_notification_cards.dart';
 
 class BaseStructure extends StatelessWidget {
   // final Widget child;
   final List<NotificationCard> list;
-  const BaseStructure({Key? key, required this.list}) : super(key: key);
+  const BaseStructure({super.key, required this.list});
 
   @override
   Widget build(BuildContext context) {

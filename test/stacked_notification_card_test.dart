@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../lib/stacked_notification_cards.dart';
+import 'package:stacked_notification_cards/stacked_notification_cards.dart';
 import 'data_source.dart';
 import 'widget_structure.dart';
 

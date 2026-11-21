@@ -14,7 +14,7 @@ class StackedNotificationActions extends StatelessWidget {
   final int notificationCount;
 
   const StackedNotificationActions({
-    Key? key,
+    super.key,
     required this.controller,
     required this.padding,
     required this.spacing,
@@ -23,7 +23,7 @@ class StackedNotificationActions extends StatelessWidget {
     required this.clearAllNotificationsAction,
     required this.clearAll,
     required this.notificationCount,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

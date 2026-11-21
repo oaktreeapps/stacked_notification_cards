@@ -1,4 +1,4 @@
-import '../lib/src/model/notification_card.dart';
+import 'package:stacked_notification_cards/src/model/notification_card.dart';
 import 'package:flutter/material.dart';
 
 List<NotificationCard> dataList1 = [

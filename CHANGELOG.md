@@ -1,3 +1,8 @@
+## 0.1.0-dev.7
+- Upgrade `flutter_slidable` from `^3.1.1` to `^4.0.3`
+- Raise SDK versions to `dart ^3.6.`0 and `flutter >=3.27.0`
+- Add `flutter_lints` and `analysis_options.yaml`
+
 ## 0.1.0-dev.6
  - Updated package dependencies
 

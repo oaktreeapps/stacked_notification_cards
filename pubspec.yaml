@@ -1,19 +1,22 @@
 name: stacked_notification_cards
 description: A Flutter implementation of iOS style stacked notifications which can be dismissed.
-repository: https://github.com/OakTree-Apps/stacked_notification_cards
+repository: https://github.com/oaktreeapps/stacked_notification_cards
+issue_tracker: https://github.com/oaktreeapps/stacked_notification_cards/issues
 
-version: 0.1.0-dev.6
+version: 0.1.0-dev.7
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.6.0
+  flutter: ">=3.27.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_slidable: ^3.1.1
-  intl: ^0.20.1
+  flutter_slidable: ^4.0.3
+  intl: ^0.20.2
 
 dev_dependencies:
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 
